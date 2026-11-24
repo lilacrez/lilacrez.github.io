@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Şifreli iPhone Projem</title>
+  <title>icarus phone</title>
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; user-select: none; }
@@ -101,11 +101,11 @@
   <!-- KİLİT EKRANI (Şifre: 1234) -->
   <div class="lock-screen" id="lockScreen">
     <div class="lock-clock">
-      <div class="lock-time" id="lockTime">12:00</div>
-      <div class="lock-date">24 Kasım Pazartesi</div>
+      <div class="lock-time" id="lockTime">05.30</div>
+      <div class="lock-date">3 Şubat Cumartesi</div>
     </div>
     <div class="passcode-container">
-      <div class="passcode-text">Şifreyi Girin (Şifre: 1234)</div>
+      <div class="passcode-text">Şifreyi Girin</div>
       <div class="dots">
         <div class="dot" id="dot1"></div>
         <div class="dot" id="dot2"></div>
@@ -131,7 +131,7 @@
 
   <!-- Üst Bilgi Çubuğu -->
   <div class="status-bar">
-    <span id="clock">12:00</span>
+    <span id="clock">05.30</span>
     <div class="dynamic-island"></div>
     <span>5G 🔋</span>
   </div>
@@ -227,7 +227,7 @@
     document.getElementById('clock').innerText = timeString;
     document.getElementById('lockTime').innerText = timeString;
   }
-  setInterval(updateClock, 1000);
+  setInterval(updateClock, 1000);Z
   updateClock();
 
   // Uygulama açma ve kapatma
