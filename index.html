@@ -283,11 +283,11 @@
             <!-- KİLİT EKRANI (Şifre: 7900) -->
             <div class="lock-screen-custom" id="customLockScreen">
               <div class="lock-clock">
-                <div class="lock-time" id="customLockTime">00:00</div>
-                <div class="lock-date" id="customLockDate">Çarşamba, 25 Kasım</div>
+                <div class="lock-time" id="customLockTime">05.33</div>
+                <div class="lock-date" id="customLockDate">Wed Feb 25</div>
               </div>
               <div class="passcode-container">
-                <div class="passcode-text">Parolayı Girin</div>
+                <div class="passcode-text">Enter Passcode</div>
                 <div class="dots">
                   <div class="dot" id="dot1"></div>
                   <div class="dot" id="dot2"></div>
@@ -313,8 +313,8 @@
 
             <div class="mainScreen">
               <div class="statusBar">
-                <div class="leftSide"><span class="operador">Telcel</span></div>
-                <div class="rightSide">5G 🔋</div>
+                <div class="leftSide"><span class="operador">KT케이티</span></div>
+                <div class="rightSide">LTE</div>
               </div>
 
               <div class="appScreen hidden">
@@ -373,7 +373,7 @@
         document.getElementById("customLockScreen").classList.add("hidden");
         document.querySelector(".appScreen").classList.remove("hidden");
       } else {
-        alert("Yanlış şifre!");
+        alert("Incorrect Password");
         clearPin();
       }
     }
@@ -405,7 +405,7 @@
           { nombre: 'Cámara', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcamara.png?alt=media&token=bd81cee7-b011-4773-a053-a7cd935e34c3' },
           { nombre: 'Recordatorios', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Frecordatorios.png?alt=media&token=2dbccbc3-374b-4eed-aa00-68db99217b7d' },
           { nombre: 'Facebook', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ffacebook.png?alt=media&token=f383d17e-32a7-49ef-8ebb-c723d556baa2' },
-          { nombre: 'Notas', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fnotas.png?alt=media&token=7a25ae1c-9010-48e4-81e8-e04a904024e9' },
+          { nombre: 'Notes', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fnotas.png?alt=media&token=7a25ae1c-9010-48e4-81e8-e04a904024e9' },
           { nombre: 'App Store', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fappstore.png?alt=media&token=fe121a13-738f-43cd-936b-45ee7fb90cec' },
           { nombre: 'Salud', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fsalud.png?alt=media&token=fee7445d-600c-4146-a590-1adc1d40001b' },
           { nombre: 'Mensajes', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fmensajes.png?alt=media&token=e389ae38-bbeb-4ca9-aa46-4be8a5b6ca90' },
