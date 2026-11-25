@@ -90,8 +90,8 @@
     .app-content { padding: 20px; flex: 1; font-size: 15px; color: #333; }
 
     /* Alt Ana Ekran Çizgisi (Home Bar) */
-    .home-bar-area { position: absolute; bottom: 0; width: 100%; height: 25px; display: flex; justify-content: center; align-items: center; z-index: 30; cursor: pointer; }
-    .home-bar { width: 120px; height: 5px; background: rgba(255,255,255,0.8); border-radius: 10px; }
+    .home-bar-area { position: absolute; bottom: 0; left: 0; width: 100%; height: 30px; display: flex; justify-content: center; align-items: center; z-index: 99; cursor: pointer; touch-action: none; }
+.home-bar { width: 120px; height: 5px; background: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
     .tiktok-feed { width: 100%; height: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scrollbar-width: none; }
 .tiktok-feed::-webkit-scrollbar { display: none; }
 .tiktok-video-card { width: 100%; height: 100%; scroll-snap-align: start; position: relative; background: #000; }
@@ -147,9 +147,9 @@
     <div class="screen">
       <div class="app" onclick="openApp('Notlar', 'Buraya kendi notlarını yazabilirsin.')">
         <div class="app-icon" style="background:#ffcc00;">📝</div>
-        <span class="app-name">Notlar</span>
+        <span class="app-name">Notes</span>
       </div>
-      <div class="app" onclick="openApp('Profil', 'Merhaba, bu benim iPhone projem!')">
+      <div class="app" onclick="openApp('Profil', 'selam ne yazacağım buraya bilmiyorum')">
         <div class="app-icon" style="background:#34c759;">👤</div>
         <span class="app-name">Profil</span>
       </div>
@@ -209,7 +209,7 @@
   </div>
 
   <!-- Ana Ekrana Dönme Çizgisi -->
-  <div class="home-bar-area" onclick="closeApp()">
+  <div class="home-bar-area" id="homeBarArea" onclick="closeApp()">
     <div class="home-bar"></div>
   </div>
 </div>
@@ -289,6 +289,36 @@ function closeApp() {
     tiktokWin.classList.remove('active');
   }
 }
+  (function enableHomeSwipeUp() {
+  const bar = document.getElementById('homeBarArea');
+  if (!bar) return;
+
+  let startY = null;
+
+  function start(e) {
+    startY = e.touches ? e.touches[0].clientY : e.clientY;
+  }
+
+  function move(e) {
+    if (startY === null) return;
+    const currentY = e.touches ? e.touches[0].clientY : e.clientY;
+    if (startY - currentY >= 35) {
+      startY = null;
+      closeApp();
+    }
+  }
+
+  function end() {
+    startY = null;
+  }
+
+  bar.addEventListener('touchstart', start, { passive: true });
+  bar.addEventListener('touchmove', move, { passive: true });
+  bar.addEventListener('touchend', end);
+  bar.addEventListener('mousedown', start);
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', end);
+})();
 </script>
 
 </body>
