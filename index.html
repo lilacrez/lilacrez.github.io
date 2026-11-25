@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,7 +99,7 @@
       background-color: #1b1b1b;
     }
 
-    /* 7900 ŞİFRE KİLİT EKRANI */
+    /* KİLİT EKRANI VE DÜZELTİLMİŞ UFAK TUŞLAR */
     .lock-screen-custom {
       position: absolute;
       inset: 0;
@@ -135,6 +135,7 @@
     .dot { width: 12px; height: 12px; border: 2px solid white; border-radius: 50%; background: transparent; transition: 0.2s; }
     .dot.filled { background: white; }
 
+    /* Tuş Takımı Boyutları Küçültüldü ve Sabitlendi */
     .keypad { 
       display: grid; 
       grid-template-columns: repeat(3, 1fr); 
@@ -187,15 +188,9 @@
     }
 
     .wrapperApps {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.3s ease-out; /* Kaydırma efekti için yumuşama */
-  cursor: grab;
-}
-.wrapperApps:active {
-  cursor: grabbing;
-}
+      display: flex;
+      width: 100%;
+      height: 100%;
     }
 
     .grupo {
@@ -285,11 +280,11 @@
               <div class="camara"></div>
             </div>
 
-            <!-- ŞİFRE EKRANI (7900) -->
+            <!-- KİLİT EKRANI (Şifre: 7900) -->
             <div class="lock-screen-custom" id="customLockScreen">
               <div class="lock-clock">
-                <div class="lock-time" id="customLockTime">00:00</div>
-                <div class="lock-date" id="customLockDate">Wednesday, September 16</div>
+                <div class="lock-time" id="customLockTime">05.33</div>
+                <div class="lock-date" id="customLockDate">Wed Feb 25</div>
               </div>
               <div class="passcode-container">
                 <div class="passcode-text">Enter Passcode</div>
@@ -311,15 +306,15 @@
                   <div class="key" onclick="pressKey('9')">9</div>
                   <div class="key" style="visibility: hidden;"></div>
                   <div class="key" onclick="pressKey('0')">0</div>
-                  <div class="key" style="font-size: 1em;" onclick="clearPin()">Delete</div>
+                  <div class="key" style="font-size: 1em;" onclick="clearPin()">Sil</div>
                 </div>
               </div>
             </div>
 
             <div class="mainScreen">
               <div class="statusBar">
-                <div class="leftSide"><span class="operador">Carrier</span></div>
-                <div class="rightSide">5G</div>
+                <div class="leftSide"><span class="operador">KT케이티</span></div>
+                <div class="rightSide">LTE</div>
               </div>
 
               <div class="appScreen hidden">
@@ -343,6 +338,7 @@
   </section>
 
   <script>
+    // ŞİFRE SİSTEMİ (7900)
     let enteredPin = "";
     const correctPin = "7900";
 
@@ -377,15 +373,16 @@
         document.getElementById("customLockScreen").classList.add("hidden");
         document.querySelector(".appScreen").classList.remove("hidden");
       } else {
-        alert("Incorrect Passcode");
+        alert("Incorrect Password");
         clearPin();
       }
     }
 
+    // SAAT VE TARİH
     function updateClock() {
       const now = new Date();
-      const timeString = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
-      const dateString = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+      const timeString = now.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", hour12: false });
+      const dateString = now.toLocaleDateString("tr-TR", { day: "numeric", month: "long", weekday: "long" });
       
       const tElem = document.getElementById("customLockTime");
       const dElem = document.getElementById("customLockDate");
@@ -395,27 +392,29 @@
     setInterval(updateClock, 1000);
     updateClock();
 
+    // UYGULAMA LİSTESİ
     $(function(){
       const globalState = {
         apps: [
-          { nombre: 'Spotify', icono: 'Spotify.jpg' },
+          { nombre: 'Clima', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fclima.png?alt=media&token=02edb357-5775-4bf1-91c0-8e3f4908ddea' },
           { nombre: 'FaceTime', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ffacetime.png?alt=media&token=4c66d073-d44e-4671-878e-6a8dd1dc7956' },
-          { nombre: 'Calendar', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcalendario.png?alt=media&token=ae918b56-05c3-40a1-be64-1abcdb291c6f' },
-          { nombre: 'Clock', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Freloj.png?alt=media&token=d0d76558-79c6-4d21-8fe7-1d13de3a6a3e' },
-          { nombre: 'Photos', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ffotos.png?alt=media&token=86d712fd-aab1-48a3-a6d0-f2b5b7f9a2ab' },
-          { nombre: 'Maps', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fmaps.png?alt=media&token=309018b2-981a-44fd-bf97-8da765fef711' },
-          { nombre: 'Camera', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcamara.png?alt=media&token=bd81cee7-b011-4773-a053-a7cd935e34c3' },
-          { nombre: 'Reminders', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Frecordatorios.png?alt=media&token=2dbccbc3-374b-4eed-aa00-68db99217b7d' },
+          { nombre: 'Calendario', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcalendario.png?alt=media&token=ae918b56-05c3-40a1-be64-1abcdb291c6f' },
+          { nombre: 'Reloj', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Freloj.png?alt=media&token=d0d76558-79c6-4d21-8fe7-1d13de3a6a3e' },
+          { nombre: 'Fotos', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ffotos.png?alt=media&token=86d712fd-aab1-48a3-a6d0-f2b5b7f9a2ab' },
+          { nombre: 'Mapas', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fmaps.png?alt=media&token=309018b2-981a-44fd-bf97-8da765fef711' },
+          { nombre: 'Cámara', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcamara.png?alt=media&token=bd81cee7-b011-4773-a053-a7cd935e34c3' },
+          { nombre: 'Recordatorios', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Frecordatorios.png?alt=media&token=2dbccbc3-374b-4eed-aa00-68db99217b7d' },
           { nombre: 'Facebook', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ffacebook.png?alt=media&token=f383d17e-32a7-49ef-8ebb-c723d556baa2' },
           { nombre: 'Notes', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fnotas.png?alt=media&token=7a25ae1c-9010-48e4-81e8-e04a904024e9' },
           { nombre: 'App Store', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fappstore.png?alt=media&token=fe121a13-738f-43cd-936b-45ee7fb90cec' },
-          { nombre: 'Health', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fsalud.png?alt=media&token=fee7445d-600c-4146-a590-1adc1d40001b' },
-          { nombre: 'Messages', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fmensajes.png?alt=media&token=e389ae38-bbeb-4ca9-aa46-4be8a5b6ca90' },
-          { nombre: 'Settings', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fconfiguracion.png?alt=media&token=dfe6b4dd-0b50-4a78-8ef1-22728ed9840c' },
+          { nombre: 'Salud', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fsalud.png?alt=media&token=fee7445d-600c-4146-a590-1adc1d40001b' },
+          { nombre: 'Mensajes', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fmensajes.png?alt=media&token=e389ae38-bbeb-4ca9-aa46-4be8a5b6ca90' },
+          { nombre: 'Configuración', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fconfiguracion.png?alt=media&token=dfe6b4dd-0b50-4a78-8ef1-22728ed9840c' },
           { nombre: 'BBVA', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fbbva.png?alt=media&token=840b9fa7-c765-4147-9138-8234eabfeb9e' },
           { nombre: 'WhatsApp', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fwhatsapp.png?alt=media&token=b3416a44-56fc-4991-a10b-e4a34944bf3c' },
-          { nombre: 'Calculator', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcalculadora.png?alt=media&token=0ce89e65-2e11-408c-8467-39637f0f19f8' },
-          { nombre: 'Twitter', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ftwitter.png?alt=media&token=4360a8ea-afce-4f20-9057-bb2d4d5a9e41' }
+          { nombre: 'Calculadora', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fcalculadora.png?alt=media&token=0ce89e65-2e11-408c-8467-39637f0f19f8' },
+          { nombre: 'Twitter', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ftwitter.png?alt=media&token=4360a8ea-afce-4f20-9057-bb2d4d5a9e41' },
+          { nombre: 'Spotify', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fspotify.png?alt=media&token=f538e504-a8d7-4707-a308-8d4bc2b6f7f6' },
           { nombre: 'YouTube', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fyoutube.png?alt=media&token=180f2d4c-32bf-4d40-855c-c70148d727e9' }
         ]
       };
@@ -445,52 +444,7 @@
       }
 
       encendido();
-    });encendido();
     });
-
-    // Kaydırma kodlarını buraya yapıştıracaksın:
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let currentSlide = 0;
-    const totalSlides = 2; 
-
-    const wrapperApps = document.querySelector('.wrapperApps');
-    if (wrapperApps) {
-      wrapperApps.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, {passive: true});
-
-      wrapperApps.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, {passive: true});
-    }
-
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50 && currentSlide < totalSlides - 1) {
-        currentSlide++;
-      }
-      if (touchEndX > touchStartX + 50 && currentSlide > 0) {
-        currentSlide--;
-      }
-      updateSlidePosition();
-    }
-
-    function updateSlidePosition() {
-      const width = document.querySelector('.mainApps').clientWidth;
-      wrapperApps.style.transition = 'transform 0.3s ease-out';
-      wrapperApps.style.transform = `translateX(-${currentSlide * width}px)`;
-      
-      const dots = document.querySelectorAll('.dot-indicator');
-      dots.forEach((dot, index) => {
-        if (index === currentSlide) {
-          dot.classList.add('activo');
-        } else {
-          dot.classList.remove('activo');
-        }
-      });
-    }
-  </script>
   </script>
 </body>
 </html>
