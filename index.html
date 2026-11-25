@@ -99,7 +99,7 @@
       background-color: #1b1b1b;
     }
 
-    /* KİLİT EKRANI (ŞİFRE: 7900) */
+    /* KİLİT EKRANI VE DÜZELTİLMİŞ UFAK TUŞLAR */
     .lock-screen-custom {
       position: absolute;
       inset: 0;
@@ -111,8 +111,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      padding: 5.5em 2em 3em;
+      justify-content: flex-start;
+      padding: 50px 20px 30px;
       color: white;
       transition: transform 0.5s cubic-bezier(.666, 0, .4, 1), opacity 0.4s;
       box-sizing: border-box;
@@ -125,21 +125,38 @@
       visibility: hidden;
     }
 
-    .lock-clock { text-align: center; }
-    .lock-time { font-size: 5em; font-weight: 300; line-height: 1; }
-    .lock-date { font-size: 1.2em; margin-top: 0.4em; font-weight: 500; }
+    .lock-clock { text-align: center; margin-bottom: 30px; }
+    .lock-time { font-size: 4.5em; font-weight: 300; line-height: 1; }
+    .lock-date { font-size: 1.1em; margin-top: 5px; font-weight: 500; }
 
-    .passcode-container { text-align: center; width: 100%; }
-    .passcode-text { font-size: 1.1em; margin-bottom: 0.6em; }
-    .dots { display: flex; justify-content: center; gap: 1em; margin-bottom: 1.5em; }
-    .dot { width: 0.9em; height: 0.9em; border: 0.15em solid white; border-radius: 50%; background: transparent; transition: 0.2s; }
+    .passcode-container { text-align: center; width: 100%; margin-top: auto; margin-bottom: 20px; }
+    .passcode-text { font-size: 1em; margin-bottom: 15px; }
+    .dots { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+    .dot { width: 12px; height: 12px; border: 2px solid white; border-radius: 50%; background: transparent; transition: 0.2s; }
     .dot.filled { background: white; }
 
-    .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8em; width: 18em; margin: 0 auto; }
+    /* Tuş Takımı Boyutları Küçültüldü ve Sabitlendi */
+    .keypad { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 12px; 
+      width: 210px; 
+      margin: 0 auto; 
+    }
     .key {
-      width: 4.8em; height: 4.8em; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
-      border-radius: 50%; display: flex; justify-content: center; align-items: center;
-      font-size: 1.8em; font-weight: 400; cursor: pointer; transition: background 0.15s;
+      width: 60px; 
+      height: 60px; 
+      background: rgba(255,255,255,0.2); 
+      backdrop-filter: blur(10px);
+      border-radius: 50%; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      font-size: 1.4em; 
+      font-weight: 400; 
+      cursor: pointer; 
+      transition: background 0.15s;
+      margin: 0 auto;
     }
     .key:active { background: rgba(255,255,255,0.5); }
 
@@ -174,7 +191,6 @@
       display: flex;
       width: 100%;
       height: 100%;
-      transition: transform 0.2s ease;
     }
 
     .grupo {
@@ -290,7 +306,7 @@
                   <div class="key" onclick="pressKey('9')">9</div>
                   <div class="key" style="visibility: hidden;"></div>
                   <div class="key" onclick="pressKey('0')">0</div>
-                  <div class="key" style="font-size: 1.2em;" onclick="clearPin()">Sil</div>
+                  <div class="key" style="font-size: 1em;" onclick="clearPin()">Sil</div>
                 </div>
               </div>
             </div>
@@ -376,7 +392,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // iOS 14 UYGULAMA LİSTESİ VE MANTIĞI
+    // UYGULAMA LİSTESİ
     $(function(){
       const globalState = {
         apps: [
@@ -400,8 +416,7 @@
           { nombre: 'Twitter', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Ftwitter.png?alt=media&token=4360a8ea-afce-4f20-9057-bb2d4d5a9e41' },
           { nombre: 'Spotify', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fspotify.png?alt=media&token=f538e504-a8d7-4707-a308-8d4bc2b6f7f6' },
           { nombre: 'YouTube', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fyoutube.png?alt=media&token=180f2d4c-32bf-4d40-855c-c70148d727e9' }
-        ],
-        wrapperApps: { appsGrupo: 20, grupoActivo: 1, totalGrupos: 1 }
+        ]
       };
 
       function pintarApps(apps, container, containerDots){
