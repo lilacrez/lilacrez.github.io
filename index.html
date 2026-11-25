@@ -91,15 +91,20 @@
 
     /* Alt Ana Ekran Çizgisi (Home Bar) */
     .home-bar-area { position: absolute; bottom: 0; left: 0; width: 100%; height: 30px; display: flex; justify-content: center; align-items: center; z-index: 99; cursor: pointer; touch-action: none; }
-.home-bar { width: 120px; height: 5px; background: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .home-bar { width: 120px; height: 5px; background: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+
+    /* TikTok Penceresi & Slider */
+    #tiktokWindow {
+      background: #000;
+      padding: 0;
+    }
     #tiktokWindow #container {
       position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
-  }
-
-  #tiktokWindow video {
+    }
+    #tiktokWindow video {
       position: absolute;
       min-width: 100%;
       min-height: 100%;
@@ -108,20 +113,19 @@
       transform: translate(-50%, -50%);
       z-index: 1;
       border: 0;
-  }
-
-  #tiktokWindow video.sliding {
+    }
+    #tiktokWindow video.sliding {
       border: 2px solid white;
       border-left: 0;
       border-right: 0;
-  }
+    }
   </style>
 </head>
 <body>
 
 <div class="iphone">
   
-  <!-- KİLİT EKRANI (Şifre: 1234) -->
+  <!-- KİLİT EKRANI (Şifre: 7900) -->
   <div class="lock-screen" id="lockScreen">
     <div class="lock-clock">
       <div class="lock-time" id="lockTime">05.30</div>
@@ -179,9 +183,9 @@
         <span class="app-name">Ayarlar</span>
       </div>
       <div class="app" onclick="openTikTok()">
-  <div class="app-icon" style="background:#000000; color:white;">🎵</div>
-  <span class="app-name">TikTok</span>
-</div>
+        <div class="app-icon" style="background:#000000; color:white;">🎵</div>
+        <span class="app-name">TikTok</span>
+      </div>
     </div>
   </div>
 
@@ -200,8 +204,10 @@
     <div class="app-header" id="appTitle">Uygulama</div>
     <div class="app-content" id="appBody">İçerik</div>
   </div>
+
   <!-- TikTok Uygulama Penceresi -->
-  <div id="container">
+  <div class="app-window" id="tiktokWindow">
+    <div id="container">
       <video id="video1" loop playsinline>
         <source src="#" type="video/mp4">
       </video>
@@ -212,27 +218,6 @@
         <source src="#" type="video/mp4">
       </video>
     </div>
-    <div class="tiktok-feed">
-      
-      <!-- 1. Video -->
-      <div class="tiktok-video-card">
-        <video src="video1.mp4" autoplay loop muted playsinline></video>
-        <div class="tiktok-info">
-          <p>@kullanici_adi</p>
-          <span>İlk videom #fyp</span>
-        </div>
-      </div>
-
-      <!-- 2. Video -->
-      <div class="tiktok-video-card">
-        <video src="video2.mp4" autoplay loop muted playsinline></video>
-        <div class="tiktok-info">
-          <p>@kullanici_adi</p>
-          <span>İkinci video 🚀</span>
-        </div>
-      </div>
-
-    </div>
   </div>
 
   <!-- Ana Ekrana Dönme Çizgisi -->
@@ -242,7 +227,7 @@
 </div>
 
 <script>
-  // Şifre Mantığı (Varsayılan şifre: 1234)
+  // Şifre Mantığı (Şifre: 7900)
   let enteredPin = "";
   const correctPin = "7900";
 
@@ -276,7 +261,7 @@
     if (enteredPin === correctPin) {
       document.getElementById("lockScreen").classList.add("hidden");
     } else {
-      alert("Yanlış Şifre! (İpucu: 1234)");
+      alert("Yanlış Şifre! (İpucu: 7900)");
       clearPin();
     }
   }
@@ -288,7 +273,7 @@
     document.getElementById('clock').innerText = timeString;
     document.getElementById('lockTime').innerText = timeString;
   }
-  setInterval(updateClock, 1000);Z
+  setInterval(updateClock, 1000);
   updateClock();
 
   // Uygulama açma ve kapatma
@@ -300,296 +285,304 @@
     win.classList.add('active');
   }
 
-  function openTikTok() {
-  const win = document.getElementById('tiktokWindow');
-  win.style.display = 'flex';
-  win.classList.add('active');
-}
-
-function closeApp() {
-  const win = document.getElementById('appWindow');
-  const tiktokWin = document.getElementById('tiktokWindow');
-  win.style.display = 'none';
-  win.classList.remove('active');
-  if (tiktokWin) {
-    tiktokWin.style.display = 'none';
-    tiktokWin.classList.remove('active');
-  }
-}
-  (function enableHomeSwipeUp() {
-  const bar = document.getElementById('homeBarArea');
-  if (!bar) return;
-
-  let startY = null;
-
-  function start(e) {
-    startY = e.touches ? e.touches[0].clientY : e.clientY;
-  }
-
-  function move(e) {
-    if (startY === null) return;
-    const currentY = e.touches ? e.touches[0].clientY : e.clientY;
-    if (startY - currentY >= 35) {
-      startY = null;
-      closeApp();
-    }
-  }
-
-  function end() {
-    startY = null;
-  }
-
-  bar.addEventListener('touchstart', start, { passive: true });
-  window.addEventListener('touchmove', move, { passive: true });
-  window.addEventListener('touchend', end);
-  bar.addEventListener('mousedown', start);
-  window.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', end);
-})();
-})();
-  const SPEED = 350;
-const MOVED = 33;
-const START = 10;
-const LAYER = { BACK: 1, FRONT: 2 };
-
-const server = ''; // Dosyalar aynı klasördeyse boş bırak, farklı klasörse örn: 'videos/' yaz
-const sources = [
-    { v: 'video1.mp4' },
-    { v: 'video2.mp4' },
-    { v: 'video3.mp4' }
-];
-
-let above = document.getElementById('video1');
-let front = document.getElementById('video2');
-let below = document.getElementById('video3');
-let group = [above, front, below];
-let pos = { slide: false };
-let which = 0;
-let tiktokInitialized = false;
-
-function delay(cb, ms = 0) {
-    setTimeout(() => cb(), ms);
-}
-
-function syncAudio() {
-    group.forEach(v => {
-        if (!v) return;
-        const isFront = v === front;
-        v.muted = !isFront;
-        if (isFront) {
-            v.volume = 1;
-            v.play().catch(() => {});
-        } else {
-            v.pause();
-        }
-    });
-}
-
-function load(video, idx) {
-    const sourceEl = video.querySelector('source');
-    if (sourceEl && sources[idx]) {
-        sourceEl.src = server + sources[idx].v;
-    }
-    video.setAttribute('data-idx', idx);
-    video.load();
-    video.addEventListener('canplay', () => {
-        syncAudio();
-    }, { once: true });
-}
-
-function reset(idx) {
-    front.style.zIndex = LAYER.FRONT;
-
-    let prev = idx === 0 ? sources.length - 1 : idx - 1;
-    load(above, prev);
-
-    let next = idx === sources.length - 1 ? 0 : idx + 1;
-    load(below, next);
-
-    syncAudio();
-}
-
-function shift(video) {
-    let matrix = window.getComputedStyle(video).transform.split(',');
-    return matrix.length > 5 ? parseFloat(matrix[5]) : 0;
-}
-
-function slide(amount, pixels = false) {
-    return `translate(-50%, ${amount}${pixels ? 'px' : '%'})`;
-}
-
-function onKeyPress(event) {
+  function closeApp() {
+    const win = document.getElementById('appWindow');
     const tiktokWin = document.getElementById('tiktokWindow');
-    if (!tiktokWin || !tiktokWin.classList.contains('active')) return;
-
-    let prev = event.key === 'ArrowDown';
-    let next = event.key === 'ArrowUp';
-
-    if (prev || next) {
-        above.style.transform = slide(-window.innerHeight, true);
-        below.style.transform = slide(+window.innerHeight, true);
-
-        group.forEach(i => {
-            i.style.transition = `transform ${SPEED * 10 / 1000}s ease-out`;
-            i.style.zIndex = LAYER.BACK;
-        });
-
-        delay(() => {
-            const MID = -50;
-            if (prev) {
-                above.style.zIndex = LAYER.FRONT;
-                above.style.transform = slide(MID);
-                front.style.transform = slide(MID + 100);
-                below.style.transform = slide(MID + 200);
-            } else {
-                below.style.zIndex = LAYER.FRONT;
-                above.style.transform = slide(MID - 200);
-                front.style.transform = slide(MID - 100);
-                below.style.transform = slide(MID);
-            }
-
-            setTimeout(() => {
-                group.forEach(i => {
-                    i.style.transition = 'none';
-                    i.style.transform = slide(MID);
-                    i.classList.remove('sliding');
-                });
-
-                let other = front;
-                if (prev) {
-                    front = above;
-                    above = other;
-                } else {
-                    front = below;
-                    below = other;
-                }
-
-                reset(parseInt(front.getAttribute('data-idx'), 10) || 0);
-            }, SPEED * 10 + 100);
-        });
-
-        event.preventDefault();
-    }
-}
-
-function onTouchStart(event) {
-    pos.began = event.touches ? event.touches[0].clientY : event.clientY;
-    pos.shift = shift(front);
-    pos.touch = pos.began;
-    pos.slide = true;
-
-    group.forEach(i => i.classList.add('sliding'));
-    event.preventDefault();
-}
-
-function onTouchMove(event) {
-    if (pos.slide) {
-        pos.touch = event.touches ? event.touches[0].clientY : event.clientY;
-        let move = pos.shift + pos.touch - pos.began;
-
-        above.style.transform = slide(move - window.innerHeight, true);
-        front.style.transform = slide(move, true);
-        below.style.transform = slide(move + window.innerHeight, true);
-
-        event.preventDefault();
-    }
-}
-
-function onTouchEnd(event) {
-    const DELTA = 100;
-    const MID = -50;
-
-    let swapping = Math.abs(pos.touch - pos.began) > (window.innerHeight * MOVED / 100);
-    let downward = pos.touch > pos.began;
-
-    group.forEach(i => {
-        i.style.transition = `transform ${SPEED / 1000}s ease-out`;
-        i.style.zIndex = LAYER.BACK;
-    });
-
-    pos.slide = false;
-
-    if (swapping) {
-        if (downward) {
-            above.style.zIndex = LAYER.FRONT;
-            above.style.transform = slide(MID);
-            front.style.transform = slide(MID + 100);
-            below.style.transform = slide(MID + 200);
-        } else {
-            below.style.zIndex = LAYER.FRONT;
-            above.style.transform = slide(MID - 200);
-            front.style.transform = slide(MID - 100);
-            below.style.transform = slide(MID);
-        }
-    } else {
-        front.style.zIndex = LAYER.FRONT;
-        above.style.transform = slide(MID - 100);
-        front.style.transform = slide(MID);
-        below.style.transform = slide(MID + 100);
-    }
-
-    setTimeout(() => {
-        group.forEach(i => {
-            i.style.transition = 'none';
-            i.style.transform = slide(MID);
-            i.classList.remove('sliding');
-        });
-
-        if (swapping) {
-            let other = front;
-            if (downward) {
-                front = above;
-                above = other;
-            } else {
-                front = below;
-                below = other;
-            }
-
-            reset(parseInt(front.getAttribute('data-idx'), 10) || 0);
-        }
-    }, SPEED + DELTA);
-
-    event.preventDefault();
-}
-
-function initTikTokSlider() {
-    if (tiktokInitialized) {
-        syncAudio();
-        return;
-    }
-    tiktokInitialized = true;
-
-    group.forEach(i => {
-        i.addEventListener('touchstart', onTouchStart, { passive: false });
-        i.addEventListener('touchmove', onTouchMove, { passive: false });
-        i.addEventListener('touchend', onTouchEnd, { passive: false });
-        i.addEventListener('mousedown', onTouchStart);
-        i.addEventListener('loadedmetadata', () => {
-            if (i.duration) {
-                i.currentTime = i.duration * START / 100;
-            }
-        });
-        i.addEventListener('error', () => {
-            console.error(`Video '${i.currentSrc}' failed to load`);
-        });
-    });
-
-    document.addEventListener('mousemove', onTouchMove);
-    document.addEventListener('mouseup', onTouchEnd);
-    document.addEventListener('keydown', onKeyPress);
-
-    load(front, which);
-    reset(which);
-}
-
-function openTikTok() {
-    const tiktokWin = document.getElementById('tiktokWindow');
+    win.style.display = 'none';
+    win.classList.remove('active');
     if (tiktokWin) {
-        tiktokWin.classList.add('active');
+      tiktokWin.style.display = 'none';
+      tiktokWin.classList.remove('active');
     }
-    initTikTokSlider();
-    syncAudio();
-}
+  }
+
+  (function enableHomeSwipeUp() {
+    const bar = document.getElementById('homeBarArea');
+    if (!bar) return;
+
+    let startY = null;
+
+    function start(e) {
+      startY = e.touches ? e.touches[0].clientY : e.clientY;
+    }
+
+    function move(e) {
+      if (startY === null) return;
+      const currentY = e.touches ? e.touches[0].clientY : e.clientY;
+      if (startY - currentY >= 35) {
+        startY = null;
+        closeApp();
+      }
+    }
+
+    function end() {
+      startY = null;
+    }
+
+    bar.addEventListener('touchstart', start, { passive: true });
+    window.addEventListener('touchmove', move, { passive: true });
+    window.addEventListener('touchend', end);
+    bar.addEventListener('mousedown', start);
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', end);
+  })();
+
+  const SPEED = 350;
+  const MOVED = 33;
+  const START = 10;
+  const LAYER = { BACK: 1, FRONT: 2 };
+
+  const server = ''; // Dosyalar aynı klasördeyse boş bırak, farklı klasörse örn: 'videos/' yaz
+  const sources = [
+      { v: 'video1.mp4' },
+      { v: 'video2.mp4' },
+      { v: 'video3.mp4' },
+      { v: 'video4.mp4' },
+      { v: 'video5.mp4' },
+      { v: 'video6.mp4' },
+      { v: 'video7.mp4' },
+      { v: 'video8.mp4' },
+      { v: 'video9.mp4' },
+      { v: 'video10.mp4' },
+      { v: 'video11.mp4' },
+      { v: 'video12.mp4' },
+      { v: 'video13.mp4' },
+      { v: 'video14.mp4' },
+      { v: 'video15.mp4' }
+  ];
+
+  let above = document.getElementById('video1');
+  let front = document.getElementById('video2');
+  let below = document.getElementById('video3');
+  let group = [above, front, below];
+  let pos = { slide: false };
+  let which = 0;
+  let tiktokInitialized = false;
+
+  function delay(cb, ms = 0) {
+      setTimeout(() => cb(), ms);
+  }
+
+  function syncAudio() {
+      group.forEach(v => {
+          if (!v) return;
+          const isFront = v === front;
+          v.muted = !isFront;
+          if (isFront) {
+              v.volume = 1;
+              v.play().catch(() => {});
+          } else {
+              v.pause();
+          }
+      });
+  }
+
+  function load(video, idx) {
+      const sourceEl = video.querySelector('source');
+      if (sourceEl && sources[idx]) {
+          sourceEl.src = server + sources[idx].v;
+      }
+      video.setAttribute('data-idx', idx);
+      video.load();
+      video.addEventListener('canplay', () => {
+          syncAudio();
+      }, { once: true });
+  }
+
+  function reset(idx) {
+      front.style.zIndex = LAYER.FRONT;
+
+      let prev = idx === 0 ? sources.length - 1 : idx - 1;
+      load(above, prev);
+
+      let next = idx === sources.length - 1 ? 0 : idx + 1;
+      load(below, next);
+
+      syncAudio();
+  }
+
+  function shift(video) {
+      let matrix = window.getComputedStyle(video).transform.split(',');
+      return matrix.length > 5 ? parseFloat(matrix[5]) : 0;
+  }
+
+  function slide(amount, pixels = false) {
+      return `translate(-50%, ${amount}${pixels ? 'px' : '%'})`;
+  }
+
+  function onKeyPress(event) {
+      const tiktokWin = document.getElementById('tiktokWindow');
+      if (!tiktokWin || !tiktokWin.classList.contains('active')) return;
+
+      let prev = event.key === 'ArrowDown';
+      let next = event.key === 'ArrowUp';
+
+      if (prev || next) {
+          above.style.transform = slide(-window.innerHeight, true);
+          below.style.transform = slide(+window.innerHeight, true);
+
+          group.forEach(i => {
+              i.style.transition = `transform ${SPEED * 10 / 1000}s ease-out`;
+              i.style.zIndex = LAYER.BACK;
+          });
+
+          delay(() => {
+              const MID = -50;
+              if (prev) {
+                  above.style.zIndex = LAYER.FRONT;
+                  above.style.transform = slide(MID);
+                  front.style.transform = slide(MID + 100);
+                  below.style.transform = slide(MID + 200);
+              } else {
+                  below.style.zIndex = LAYER.FRONT;
+                  above.style.transform = slide(MID - 200);
+                  front.style.transform = slide(MID - 100);
+                  below.style.transform = slide(MID);
+              }
+
+              setTimeout(() => {
+                  group.forEach(i => {
+                      i.style.transition = 'none';
+                      i.style.transform = slide(MID);
+                      i.classList.remove('sliding');
+                  });
+
+                  let other = front;
+                  if (prev) {
+                      front = above;
+                      above = other;
+                  } else {
+                      front = below;
+                      below = other;
+                  }
+
+                  reset(parseInt(front.getAttribute('data-idx'), 10) || 0);
+              }, SPEED * 10 + 100);
+          });
+
+          event.preventDefault();
+      }
+  }
+
+  function onTouchStart(event) {
+      pos.began = event.touches ? event.touches[0].clientY : event.clientY;
+      pos.shift = shift(front);
+      pos.touch = pos.began;
+      pos.slide = true;
+
+      group.forEach(i => i.classList.add('sliding'));
+      event.preventDefault();
+  }
+
+  function onTouchMove(event) {
+      if (pos.slide) {
+          pos.touch = event.touches ? event.touches[0].clientY : event.clientY;
+          let move = pos.shift + pos.touch - pos.began;
+
+          above.style.transform = slide(move - window.innerHeight, true);
+          front.style.transform = slide(move, true);
+          below.style.transform = slide(move + window.innerHeight, true);
+
+          event.preventDefault();
+      }
+  }
+
+  function onTouchEnd(event) {
+      const DELTA = 100;
+      const MID = -50;
+
+      let swapping = Math.abs(pos.touch - pos.began) > (window.innerHeight * MOVED / 100);
+      let downward = pos.touch > pos.began;
+
+      group.forEach(i => {
+          i.style.transition = `transform ${SPEED / 1000}s ease-out`;
+          i.style.zIndex = LAYER.BACK;
+      });
+
+      pos.slide = false;
+
+      if (swapping) {
+          if (downward) {
+              above.style.zIndex = LAYER.FRONT;
+              above.style.transform = slide(MID);
+              front.style.transform = slide(MID + 100);
+              below.style.transform = slide(MID + 200);
+          } else {
+              below.style.zIndex = LAYER.FRONT;
+              above.style.transform = slide(MID - 200);
+              front.style.transform = slide(MID - 100);
+              below.style.transform = slide(MID);
+          }
+      } else {
+          front.style.zIndex = LAYER.FRONT;
+          above.style.transform = slide(MID - 100);
+          front.style.transform = slide(MID);
+          below.style.transform = slide(MID + 100);
+      }
+
+      setTimeout(() => {
+          group.forEach(i => {
+              i.style.transition = 'none';
+              i.style.transform = slide(MID);
+              i.classList.remove('sliding');
+          });
+
+          if (swapping) {
+              let other = front;
+              if (downward) {
+                  front = above;
+                  above = other;
+              } else {
+                  front = below;
+                  below = other;
+              }
+
+              reset(parseInt(front.getAttribute('data-idx'), 10) || 0);
+          }
+      }, SPEED + DELTA);
+
+      event.preventDefault();
+  }
+
+  function initTikTokSlider() {
+      if (tiktokInitialized) {
+          syncAudio();
+          return;
+      }
+      tiktokInitialized = true;
+
+      group.forEach(i => {
+          i.addEventListener('touchstart', onTouchStart, { passive: false });
+          i.addEventListener('touchmove', onTouchMove, { passive: false });
+          i.addEventListener('touchend', onTouchEnd, { passive: false });
+          i.addEventListener('mousedown', onTouchStart);
+          i.addEventListener('loadedmetadata', () => {
+              if (i.duration) {
+                  i.currentTime = i.duration * START / 100;
+              }
+          });
+          i.addEventListener('error', () => {
+              console.error(`Video '${i.currentSrc}' failed to load`);
+          });
+      });
+
+      document.addEventListener('mousemove', onTouchMove);
+      document.addEventListener('mouseup', onTouchEnd);
+      document.addEventListener('keydown', onKeyPress);
+
+      load(front, which);
+      reset(which);
+  }
+
+  function openTikTok() {
+      const tiktokWin = document.getElementById('tiktokWindow');
+      if (tiktokWin) {
+          tiktokWin.style.display = 'flex';
+          tiktokWin.classList.add('active');
+      }
+      initTikTokSlider();
+      syncAudio();
+  }
 </script>
 
 </body>
