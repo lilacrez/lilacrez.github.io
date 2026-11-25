@@ -227,80 +227,82 @@
 </div>
 
 <script>
- 
-// ŞİFRE SİSTEMİ
-let enteredPin = "";
-const correctPin = "7900";
+  // ŞİFRE SİSTEMİ
+  let enteredPin = "";
+  const correctPin = "7900";
 
-function pressKey(num) {
-  if (enteredPin.length < 4) {
-    enteredPin += num;
+  function pressKey(num) {
+    if (enteredPin.length < 4) {
+      enteredPin += num;
+      updateDots();
+
+      if (enteredPin.length === 4) {
+        setTimeout(checkPin, 200);
+      }
+    }
+  }
+
+  function clearPin() {
+    enteredPin = "";
     updateDots();
+  }
 
-    if (enteredPin.length === 4) {
-      setTimeout(checkPin, 200);
+  function updateDots() {
+    for (let i = 1; i <= 4; i++) {
+      const dot = document.getElementById("dot" + i);
+
+      if (i <= enteredPin.length) {
+        dot.classList.add("filled");
+      } else {
+        dot.classList.remove("filled");
+      }
     }
   }
-}
 
-function clearPin() {
-  enteredPin = "";
-  updateDots();
-}
-
-function updateDots() {
-  for (let i = 1; i <= 4; i++) {
-    const dot = document.getElementById("dot" + i);
-
-    if (i <= enteredPin.length) {
-      dot.classList.add("filled");
+  function checkPin() {
+    if (enteredPin === correctPin) {
+      document.getElementById("lockScreen").classList.add("hidden");
     } else {
-      dot.classList.remove("filled");
+      alert("Yanlış şifre!");
+      clearPin();
     }
   }
-}
 
-function checkPin() {
-  if (enteredPin === correctPin) {
-    document.getElementById("lockScreen").classList.add("hidden");
-  } else {
-    alert("Yanlış şifre!");
-    clearPin();
+  // SAAT
+  function updateClock() {
+    const now = new Date();
+
+    const timeString = now.toLocaleTimeString("tr-TR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
+
+    document.getElementById("clock").innerText = timeString;
+    document.getElementById("lockTime").innerText = timeString;
   }
-}
 
-// SAAT
-function updateClock() {
-  const now = new Date();
+  setInterval(updateClock, 1000);
+  updateClock();
 
-  const timeString = now.toLocaleTimeString("tr-TR", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false
-  });
+  // NORMAL UYGULAMALARI AÇ
+  function openApp(title, content) {
+    document.getElementById("appTitle").innerText = title;
+    document.getElementById("appBody").innerText = content;
 
-  document.getElementById("clock").innerText = timeString;
-  document.getElementById("lockTime").innerText = timeString;
-}
+    document.getElementById("appWindow").style.display = "flex";
+  }
 
-setInterval(updateClock, 1000);
-updateClock();
+  // TIKTOK'U AÇ
+  function openTikTok() {
+    document.getElementById("tiktokWindow").style.display = "flex";
+  }
 
-// NORMAL UYGULAMALARI AÇ
-function openApp(title, content) {
-  document.getElementById("appTitle").innerText = title;
-  document.getElementById("appBody").innerText = content;
-
-  document.getElementById("appWindow").style.display = "flex";
-}
-
-// TIKTOK'U AÇ
-function openTikTok() {
-  document.getElementById("tiktokWindow").style.display = "flex";
-}
-
-// UYGULAMALARI KAPAT
-function closeApp() {
-  document.getElementById("appWindow").style.display = "none";
-  document.getElementById("tiktokWindow").style.display = "none";
-}
+  // UYGULAMALARI KAPAT
+  function closeApp() {
+    document.getElementById("appWindow").style.display = "none";
+    document.getElementById("tiktokWindow").style.display = "none";
+  }
+</script>
+</body>
+</html>
