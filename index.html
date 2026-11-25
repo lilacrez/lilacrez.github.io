@@ -266,6 +266,210 @@
       box-sizing: border-box;
       z-index: 50;
     }
+    /* iOS WHATSAPP ARAYÜZÜ */
+    .whatsapp-app {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0b141a;
+      color: #e9edef;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      border-radius: 32px;
+      overflow: hidden;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .whatsapp-app.open {
+      transform: translateY(0);
+    }
+
+    .wa-main-header {
+      padding: 36px 14px 8px;
+      background-color: #0b141a;
+    }
+
+    .wa-top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .wa-circle-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: #202c33;
+      color: #e9edef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .wa-right-actions { display: flex; gap: 8px; }
+    .wa-green-btn { background-color: #00a884; color: #0b141a; font-weight: bold; }
+
+    .wa-big-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .wa-search-bar {
+      background-color: #202c33;
+      border-radius: 10px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #8696a0;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .wa-filters { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+    .wa-filter-pill {
+      background-color: #202c33;
+      color: #8696a0;
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .wa-filter-pill.active { background-color: #0a332c; color: #00a884; }
+
+    .wa-archived {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      font-size: 12.5px;
+      color: #8696a0;
+      border-bottom: 0.5px solid #1f2c33;
+    }
+
+    .wa-archived-left { display: flex; align-items: center; gap: 12px; color: #e9edef; font-weight: 500; }
+
+    .wa-chat-list { flex: 1; overflow-y: auto; }
+    .wa-chat-list::-webkit-scrollbar { display: none; }
+
+    .wa-chat-item { display: flex; align-items: center; padding: 9px 14px; cursor: pointer; }
+    .wa-chat-item:active { background-color: #182229; }
+
+    .wa-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #2a3942;
+      margin-right: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #cfd8dc;
+      font-size: 15px;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .wa-info { flex: 1; overflow: hidden; border-bottom: 0.5px solid #1f2c33; padding-bottom: 9px; }
+    .wa-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .wa-name { font-size: 14px; font-weight: 600; color: #e9edef; }
+    .wa-time { font-size: 11px; color: #8696a0; }
+    .wa-time.unread { color: #00a884; font-weight: 500; }
+
+    .wa-bottom-row { display: flex; justify-content: space-between; align-items: center; }
+    .wa-last-msg { font-size: 12px; color: #8696a0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 195px; }
+
+    .wa-unread-badge {
+      background-color: #00a884;
+      color: #0b141a;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+
+    .wa-tab-bar {
+      background-color: #161f26;
+      border-top: 0.5px solid #222d34;
+      display: flex;
+      justify-content: space-around;
+      padding: 6px 0 18px;
+      font-size: 9.5px;
+      color: #8696a0;
+    }
+    .wa-tab { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .wa-tab.active { color: #e9edef; font-weight: 600; }
+    .wa-tab-icon { font-size: 16px; }
+
+    /* Sohbet İçi Arayüz */
+    .wa-chat-view {
+      position: absolute;
+      inset: 0;
+      background-color: #0b141a;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 210;
+    }
+    .wa-chat-view.active { transform: translateX(0); }
+
+    .wa-chat-header {
+      background-color: #161f26;
+      padding: 36px 12px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px solid #222d34;
+    }
+    .wa-chat-header-left { display: flex; align-items: center; gap: 8px; }
+    .wa-back-btn { color: #00a884; font-size: 18px; cursor: pointer; font-weight: bold; padding-right: 4px; }
+    .wa-chat-avatar-sm {
+      width: 30px; height: 30px; border-radius: 50%; background-color: #2a3942;
+      display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff;
+      background-size: cover; background-position: center;
+    }
+    .wa-chat-title-box h3 { font-size: 13.5px; font-weight: 600; color: #fff; }
+    .wa-chat-title-box span { font-size: 10px; color: #8696a0; display: block; }
+    .wa-chat-icons { display: flex; gap: 12px; color: #00a884; font-size: 14px; }
+
+    .wa-messages {
+      flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
+      background-color: #0b141a; background-image: radial-gradient(#1d282f 1px, transparent 1px); background-size: 16px 16px;
+    }
+    .wa-messages::-webkit-scrollbar { display: none; }
+
+    .msg { max-width: 78%; padding: 6px 9px 4px; border-radius: 10px; font-size: 12px; line-height: 1.35; position: relative; word-wrap: break-word; }
+    .msg.received { background-color: #202c33; color: #e9edef; align-self: flex-start; border-top-left-radius: 2px; }
+    .msg.sent { background-color: #005c4b; color: #e9edef; align-self: flex-end; border-top-right-radius: 2px; }
+
+    .msg-meta { display: flex; justify-content: flex-end; align-items: center; gap: 3px; font-size: 9px; color: rgba(255, 255, 255, 0.6); margin-top: 2px; }
+    .blue-ticks { color: #53bdeb; font-weight: bold; letter-spacing: -2px; }
+
+    .wa-input-area { background-color: #161f26; padding: 7px 10px 20px; display: flex; gap: 8px; align-items: center; }
+    .wa-plus-btn { color: #00a884; font-size: 20px; font-weight: 300; cursor: pointer; }
+    .wa-input { flex: 1; background-color: #2a3942; border: none; border-radius: 16px; padding: 6px 12px; color: #fff; font-size: 12px; outline: none; }
+    .wa-send-btn { background-color: #00a884; color: #0b141a; border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+    /* Alt Home Bar Çubuğu */
+    .home-bar-container { position: absolute; bottom: 4px; left: 0; width: 100%; height: 14px; display: flex; justify-content: center; align-items: center; z-index: 300; cursor: pointer; }
+    .home-bar { width: 110px; height: 4px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -324,7 +528,7 @@
                 <div class="wrapperDots"></div>
                 <div class="deckApps">
                   <div class="app"><div class="icono" style="background-image: url(galeri.jpg);"></div></div>
-                  <div class="app"><div class="icono" style="background-image: url(whatsapp.jpg);"></div></div>
+                  <div class="app" onclick="openWhatsApp()"><div class="icono" style="background-image: url(whatsapp.jpg);"></div></div>
                   <div class="app"><div class="icono" style="background-image: url(telefon.jpg);"></div></div>
                   <div class="app"><div class="icono" style="background-image: url(takvim.jpg);"></div></div>
                 </div>
@@ -336,7 +540,67 @@
       </div>
     </div>
   </section>
+<!-- WHATSAPP ARAYÜZÜ -->
+              <div class="whatsapp-app" id="whatsappApp">
+                <div class="wa-main-header">
+                  <div class="wa-top-actions">
+                    <div class="wa-circle-btn">•••</div>
+                    <div class="wa-right-actions">
+                      <div class="wa-circle-btn">📷</div>
+                      <div class="wa-circle-btn wa-green-btn">+</div>
+                    </div>
+                  </div>
+                  <div class="wa-big-title">Sohbetler</div>
+                  <div class="wa-search-bar"><span>🔍</span><span>Ara</span></div>
+                  <div class="wa-filters">
+                    <div class="wa-filter-pill active">Tümü</div>
+                    <div class="wa-filter-pill">Okunmamış</div>
+                    <div class="wa-filter-pill">Favoriler</div>
+                    <div class="wa-filter-pill">Gruplar</div>
+                  </div>
+                </div>
 
+                <div class="wa-archived">
+                  <div class="wa-archived-left"><span>📥</span><span>Arşivlenmiş</span></div>
+                  <span>2</span>
+                </div>
+
+                <div class="wa-chat-list" id="waChatList"></div>
+
+                <div class="wa-tab-bar">
+                  <div class="wa-tab"><span class="wa-tab-icon">⭕</span><span>Güncellemeler</span></div>
+                  <div class="wa-tab"><span class="wa-tab-icon">📞</span><span>Aramalar</span></div>
+                  <div class="wa-tab"><span class="wa-tab-icon">👥</span><span>Topluluklar</span></div>
+                  <div class="wa-tab active"><span class="wa-tab-icon">💬</span><span>Sohbetler</span></div>
+                  <div class="wa-tab"><span class="wa-tab-icon">⚙️</span><span>Ayarlar</span></div>
+                </div>
+
+                <!-- Sohbet İçi Pencere -->
+                <div class="wa-chat-view" id="waChatView">
+                  <div class="wa-chat-header">
+                    <div class="wa-chat-header-left">
+                      <span class="wa-back-btn" onclick="closeChat()">&#8249;</span>
+                      <div class="wa-chat-avatar-sm" id="waActiveAvatar">TK</div>
+                      <div class="wa-chat-title-box">
+                        <h3 id="waActiveChatName">Kişi</h3>
+                        <span id="waActiveStatus">çevrimiçi</span>
+                      </div>
+                    </div>
+                    <div class="wa-chat-icons"><span>📹</span><span>📞</span></div>
+                  </div>
+                  <div class="wa-messages" id="waMessages"></div>
+                  <div class="wa-input-area">
+                    <span class="wa-plus-btn">+</span>
+                    <input type="text" class="wa-input" id="waInput" placeholder="Mesaj" onkeypress="handleWaEnter(event)">
+                    <button class="wa-send-btn" onclick="sendWaMessage()">&#10148;</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ana Ekrana Dönüş Çubuğu (Home Bar) -->
+              <div class="home-bar-container" onclick="closeAllApps()">
+                <div class="home-bar"></div>
+              </div>
   <script>
     // ŞİFRE SİSTEMİ (7900)
     let enteredPin = "";
@@ -438,6 +702,159 @@
 
       encendido();
     });
+    // 10 KİŞİLİK WHATSAPP SOHBETLERİ
+    const waChats = [
+      {
+        id: 1,
+        name: "Tamirci Kadir",
+        avatar: "kadir.jpg",
+        initials: "TK",
+        status: "çevrimiçi",
+        time: "21:40",
+        unread: 1,
+        messages: [
+          { type: "received", text: "Usta motorun zincirini sıktım, yağını da değiştirdim.", time: "21:35" },
+          { type: "sent", text: "Eline sağlık Kadir, borcum ne kadar?", time: "21:38" },
+          { type: "received", text: "Gelince hallederiz, akşam çay içmeye uğra.", time: "21:40" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Gece Sürüşü 🏍️",
+        avatar: "",
+        initials: "GS",
+        status: "Kadir, Mert, Sen",
+        time: "19:15",
+        unread: 0,
+        messages: [
+          { type: "received", text: "Mert: Gece 01:00'de köprü çıkışında buluşuyoruz.", time: "19:10" },
+          { type: "sent", text: "Depo full, tam saatinde oradayım.", time: "19:15" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Selin",
+        avatar: "selin.jpg",
+        initials: "S",
+        status: "son görülme bugün 18:20",
+        time: "16:04",
+        unread: 0,
+        messages: [
+          { type: "received", text: "Dün gece yine egzoz sesiyle mahalleyi inlettin.", time: "15:50" },
+          { type: "sent", text: "Uyumadığını biliyordum.", time: "16:02" }
+        ]
+      },
+      { id: 4, name: "Kişi 4", avatar: "", initials: "K4", status: "çevrimiçi", time: "14:20", unread: 0, messages: [{ type: "received", text: "Selam, ne yapıyorsun?", time: "14:19" }] },
+      { id: 5, name: "Kişi 5", avatar: "", initials: "K5", status: "çevrimiçi", time: "12:10", unread: 0, messages: [{ type: "received", text: "Yarın buluşuyor muyuz?", time: "12:05" }] },
+      { id: 6, name: "Kişi 6", avatar: "", initials: "K6", status: "çevrimiçi", time: "Dün", unread: 0, messages: [{ type: "sent", text: "Dosyaları gönderdim.", time: "11:00" }] },
+      { id: 7, name: "Kişi 7", avatar: "", initials: "K7", status: "çevrimiçi", time: "Dün", unread: 0, messages: [{ type: "received", text: "Görüştük mü?", time: "09:40" }] },
+      { id: 8, name: "Kişi 8", avatar: "", initials: "K8", status: "çevrimiçi", time: "23 Ara", unread: 0, messages: [{ type: "received", text: "İyi akşamlar.", time: "20:15" }] },
+      { id: 9, name: "Kişi 9", avatar: "", initials: "K9", status: "çevrimiçi", time: "20 Ara", unread: 0, messages: [{ type: "sent", text: "Tamamdır anlaştık.", time: "18:30" }] },
+      { id: 10, name: "Kişi 10", avatar: "", initials: "K10", status: "çevrimiçi", time: "15 Ara", unread: 0, messages: [{ type: "received", text: "Görüşmek üzere.", time: "14:00" }] }
+    ];
+
+    let currentChatId = null;
+
+    function renderWaList() {
+      const list = document.getElementById("waChatList");
+      list.innerHTML = "";
+      waChats.forEach(chat => {
+        const lastMsg = chat.messages[chat.messages.length - 1];
+        const tickHtml = lastMsg.type === "sent" ? '<span class="blue-ticks">✓✓</span> ' : '';
+        const badgeHtml = chat.unread > 0 ? `<div class="wa-unread-badge">${chat.unread}</div>` : '';
+        const timeClass = chat.unread > 0 ? 'wa-time unread' : 'wa-time';
+
+        const avatarStyle = chat.avatar ? `background-image: url('${chat.avatar}');` : '';
+        const avatarText = chat.avatar ? '' : chat.initials;
+
+        list.innerHTML += `
+          <div class="wa-chat-item" onclick="openChat(${chat.id})">
+            <div class="wa-avatar" style="${avatarStyle}">${avatarText}</div>
+            <div class="wa-info">
+              <div class="wa-top-row">
+                <span class="wa-name">${chat.name}</span>
+                <span class="${timeClass}">${chat.time}</span>
+              </div>
+              <div class="wa-bottom-row">
+                <span class="wa-last-msg">${tickHtml}${lastMsg.text}</span>
+                ${badgeHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    window.openWhatsApp = function() {
+      renderWaList();
+      document.getElementById("whatsappApp").classList.add("open");
+    };
+
+    window.openChat = function(id) {
+      currentChatId = id;
+      const chat = waChats.find(c => c.id === id);
+      chat.unread = 0;
+      document.getElementById("waActiveChatName").innerText = chat.name;
+      document.getElementById("waActiveStatus").innerText = chat.status;
+
+      const activeAvatar = document.getElementById("waActiveAvatar");
+      if (chat.avatar) {
+        activeAvatar.style.backgroundImage = `url('${chat.avatar}')`;
+        activeAvatar.style.backgroundSize = "cover";
+        activeAvatar.style.backgroundPosition = "center";
+        activeAvatar.innerText = "";
+      } else {
+        activeAvatar.style.backgroundImage = "none";
+        activeAvatar.innerText = chat.initials;
+      }
+
+      renderMessages(chat);
+      document.getElementById("waChatView").classList.add("active");
+    };
+
+    window.closeChat = function() {
+      document.getElementById("waChatView").classList.remove("active");
+      renderWaList();
+    };
+
+    function renderMessages(chat) {
+      const msgBox = document.getElementById("waMessages");
+      msgBox.innerHTML = "";
+      chat.messages.forEach(m => {
+        const tickHtml = m.type === "sent" ? '<span class="blue-ticks">✓✓</span>' : '';
+        msgBox.innerHTML += `
+          <div class="msg ${m.type}">
+            <div>${m.text}</div>
+            <div class="msg-meta"><span>${m.time}</span>${tickHtml}</div>
+          </div>
+        `;
+      });
+      msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
+    window.sendWaMessage = function() {
+      const input = document.getElementById("waInput");
+      const text = input.value.trim();
+      if (!text || !currentChatId) return;
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+
+      const chat = waChats.find(c => c.id === currentChatId);
+      chat.messages.push({ type: "sent", text: text, time: timeStr });
+      chat.time = timeStr;
+      input.value = "";
+      renderMessages(chat);
+    };
+
+    window.handleWaEnter = function(e) {
+      if (e.key === "Enter") sendWaMessage();
+    };
+
+    window.closeAllApps = function() {
+      document.getElementById("whatsappApp").classList.remove("open");
+      document.getElementById("waChatView").classList.remove("active");
+    };
   </script>
 </body>
 </html>
