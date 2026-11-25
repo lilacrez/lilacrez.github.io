@@ -227,59 +227,80 @@
 </div>
 
 <script>
-  // Şifre Mantığı (Şifre: 7900)
-  let enteredPin = "";
-  const correctPin = "7900";
+ 
+// ŞİFRE SİSTEMİ
+let enteredPin = "";
+const correctPin = "7900";
 
-  function pressKey(num) {
-    if (enteredPin.length < 4) {
-      enteredPin += num;
-      updateDots();
-      if (enteredPin.length === 4) {
-        setTimeout(checkPin, 200);
-      }
-    }
-  }
-
-  function clearPin() {
-    enteredPin = "";
+function pressKey(num) {
+  if (enteredPin.length < 4) {
+    enteredPin += num;
     updateDots();
-  }
 
-  function updateDots() {
-    for (let i = 1; i <= 4; i++) {
-      const dot = document.getElementById(`dot${i}`);
-      if (i <= enteredPin.length) {
-        dot.classList.add("filled");
-      } else {
-        dot.classList.remove("filled");
-      }
+    if (enteredPin.length === 4) {
+      setTimeout(checkPin, 200);
     }
   }
+}
 
-  function checkPin() {
-    if (enteredPin === correctPin) {
-      document.getElementById("lockScreen").classList.add("hidden");
+function clearPin() {
+  enteredPin = "";
+  updateDots();
+}
+
+function updateDots() {
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById("dot" + i);
+
+    if (i <= enteredPin.length) {
+      dot.classList.add("filled");
     } else {
-      alert("Yanlış Şifre! (İpucu: 7900)");
-      clearPin();
+      dot.classList.remove("filled");
     }
   }
+}
 
-  // Saati canlı güncelle
-  function updateClock() {
-    const now = new Date();
-    const timeString = now.toTimeString().slice(0, 5);
-    document.getElementById('clock').innerText = timeString;
-    document.getElementById('lockTime').innerText = timeString;
+function checkPin() {
+  if (enteredPin === correctPin) {
+    document.getElementById("lockScreen").classList.add("hidden");
+  } else {
+    alert("Yanlış şifre!");
+    clearPin();
   }
-  setInterval(updateClock, 1000);
-  updateClock();
+}
 
-  // Uygulama açma ve kapatma
-  function openApp(title, content) {
-    document.getElementById('appTitle').innerText = title;
-    document.getElementById('appBody').innerText = content;
-    const win = document.getElementById('appWindow');
-    win.style.display = 'flex';
-    win.classList.add('active');
+// SAAT
+function updateClock() {
+  const now = new Date();
+
+  const timeString = now.toLocaleTimeString("tr-TR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+
+  document.getElementById("clock").innerText = timeString;
+  document.getElementById("lockTime").innerText = timeString;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+// NORMAL UYGULAMALARI AÇ
+function openApp(title, content) {
+  document.getElementById("appTitle").innerText = title;
+  document.getElementById("appBody").innerText = content;
+
+  document.getElementById("appWindow").style.display = "flex";
+}
+
+// TIKTOK'U AÇ
+function openTikTok() {
+  document.getElementById("tiktokWindow").style.display = "flex";
+}
+
+// UYGULAMALARI KAPAT
+function closeApp() {
+  document.getElementById("appWindow").style.display = "none";
+  document.getElementById("tiktokWindow").style.display = "none";
+}
