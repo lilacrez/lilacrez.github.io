@@ -187,9 +187,15 @@
     }
 
     .wrapperApps {
-      display: flex;
-      width: 100%;
-      height: 100%;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-out; /* Kaydırma efekti için yumuşama */
+  cursor: grab;
+}
+.wrapperApps:active {
+  cursor: grabbing;
+}
     }
 
     .grupo {
@@ -440,7 +446,52 @@
       }
 
       encendido();
+    });encendido();
     });
+
+    // Kaydırma kodlarını buraya yapıştıracaksın:
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let currentSlide = 0;
+    const totalSlides = 2; 
+
+    const wrapperApps = document.querySelector('.wrapperApps');
+    if (wrapperApps) {
+      wrapperApps.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, {passive: true});
+
+      wrapperApps.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, {passive: true});
+    }
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50 && currentSlide < totalSlides - 1) {
+        currentSlide++;
+      }
+      if (touchEndX > touchStartX + 50 && currentSlide > 0) {
+        currentSlide--;
+      }
+      updateSlidePosition();
+    }
+
+    function updateSlidePosition() {
+      const width = document.querySelector('.mainApps').clientWidth;
+      wrapperApps.style.transition = 'transform 0.3s ease-out';
+      wrapperApps.style.transform = `translateX(-${currentSlide * width}px)`;
+      
+      const dots = document.querySelectorAll('.dot-indicator');
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('activo');
+        } else {
+          dot.classList.remove('activo');
+        }
+      });
+    }
+  </script>
   </script>
 </body>
 </html>
