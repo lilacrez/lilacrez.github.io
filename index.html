@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>icarus phone</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
     :root {
       --size: max(5px, 1vmin);
@@ -57,6 +57,7 @@
       background: #00000a;
       margin: 0;
       padding: 0;
+      user-select: none;
     }
 
     .scene {
@@ -165,18 +166,119 @@
       flex-direction: column;
       align-items: center;
       gap: calc(var(--pad) * 2);
+      overflow: hidden;
     }
 
     .screen-container:before {
       content: '';
       position: absolute;
-      z-index: 2;
+      z-index: 20;
       background: white;
       width: 36.6%;
       bottom: calc(var(--pad) * 0.75);
       height: calc(var(--pad) * 0.5);
       border-radius: calc(var(--pad) * 0.25);
       filter: drop-shadow(0 0.1em 0.25em rgba(0, 0, 0, 0.1));
+    }
+
+    /* KİLİT EKRANI (YENİ ARAYÜZE UYARLANMIŞ) */
+    .lock-screen {
+      position: absolute;
+      inset: 0;
+      border-radius: calc(var(--border-radius) - var(--pad));
+      background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8.5em 2em 4.5em;
+      color: white;
+      transition: transform 0.5s var(--ease-out), opacity 0.4s;
+      box-sizing: border-box;
+    }
+
+    .lock-screen.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .lock-clock {
+      text-align: center;
+    }
+
+    .lock-time {
+      font-size: 7.5em;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .lock-date {
+      font-size: 1.8em;
+      margin-top: 0.4em;
+      font-weight: 500;
+      text-shadow: 0 0.1em 0.3em rgba(0,0,0,0.5);
+    }
+
+    .passcode-container {
+      text-align: center;
+      width: 100%;
+    }
+
+    .passcode-text {
+      font-size: 1.6em;
+      margin-bottom: 1em;
+      text-shadow: 0 0.1em 0.2em rgba(0,0,0,0.8);
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 1.6em;
+      margin-bottom: 2.5em;
+    }
+
+    .dot {
+      width: 1.3em;
+      height: 1.3em;
+      border: 0.2em solid white;
+      border-radius: 50%;
+      background: transparent;
+      transition: 0.2s;
+    }
+
+    .dot.filled {
+      background: white;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6em;
+      width: 26em;
+      margin: 0 auto;
+    }
+
+    .key {
+      width: 7em;
+      height: 7em;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.6em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .key:active {
+      background: rgba(255,255,255,0.5);
     }
 
     .bg {
@@ -256,7 +358,7 @@
 
     .notch-container {
       position: absolute;
-      z-index: 3;
+      z-index: 25;
       top: var(--pad);
       right: var(--pad);
       left: var(--pad);
@@ -324,7 +426,7 @@
 
     .notch-blur {
       position: absolute;
-      z-index: 2;
+      z-index: 24;
       top: calc(var(--pad) - 3px);
       right: calc(var(--pad) - 3px);
       left: calc(var(--pad) - 3px);
@@ -489,7 +591,7 @@
       border-radius: 50%;
       pointer-events: none;
       position: absolute;
-      z-index: 4;
+      z-index: 26;
       top: calc(var(--pad) * 2);
       right: calc(50% - calc(var(--notch-width) * 0.5));
       margin-right: calc(var(--pad) * 0.333);
@@ -542,6 +644,7 @@
       transform: scale3d(var(--scale), var(--scale), 1);
       animation: appear var(--duration) var(--ease-out) forwards;
       position: relative;
+      cursor: pointer;
     }
 
     .app:nth-child(1),
@@ -1014,6 +1117,38 @@
         </div>
         <div class="camera"></div>
         <div class="screen-container">
+          
+          <!-- KİLİT EKRANI (Şifre: 7900) -->
+          <div class="lock-screen" id="lockScreen">
+            <div class="lock-clock">
+              <div class="lock-time" id="lockTime">05.30</div>
+              <div class="lock-date" id="lockDate">25 Kasım Çarşamba</div>
+            </div>
+            <div class="passcode-container">
+              <div class="passcode-text">Şifreyi Girin</div>
+              <div class="dots">
+                <div class="dot" id="dot1"></div>
+                <div class="dot" id="dot2"></div>
+                <div class="dot" id="dot3"></div>
+                <div class="dot" id="dot4"></div>
+              </div>
+              <div class="keypad">
+                <div class="key" onclick="pressKey('1')">1</div>
+                <div class="key" onclick="pressKey('2')">2</div>
+                <div class="key" onclick="pressKey('3')">3</div>
+                <div class="key" onclick="pressKey('4')">4</div>
+                <div class="key" onclick="pressKey('5')">5</div>
+                <div class="key" onclick="pressKey('6')">6</div>
+                <div class="key" onclick="pressKey('7')">7</div>
+                <div class="key" onclick="pressKey('8')">8</div>
+                <div class="key" onclick="pressKey('9')">9</div>
+                <div class="key" style="visibility: hidden;"></div>
+                <div class="key" onclick="pressKey('0')">0</div>
+                <div class="key" style="font-size: 1.5em;" onclick="clearPin()">Sil</div>
+              </div>
+            </div>
+          </div>
+
           <div class="bg">
             <div class="deep-purple">
               <div class="section"><div class="glow"></div></div>
@@ -1077,6 +1212,68 @@
   </div>
 
   <script>
+    // ŞİFRE SİSTEMİ
+    let enteredPin = "";
+    const correctPin = "7900";
+
+    function pressKey(num) {
+      if (enteredPin.length < 4) {
+        enteredPin += num;
+        updateDots();
+
+        if (enteredPin.length === 4) {
+          setTimeout(checkPin, 200);
+        }
+      }
+    }
+
+    function clearPin() {
+      enteredPin = "";
+      updateDots();
+    }
+
+    function updateDots() {
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById("dot" + i);
+        if (i <= enteredPin.length) {
+          dot.classList.add("filled");
+        } else {
+          dot.classList.remove("filled");
+        }
+      }
+    }
+
+    function checkPin() {
+      if (enteredPin === correctPin) {
+        document.getElementById("lockScreen").classList.add("hidden");
+      } else {
+        alert("Yanlış şifre!");
+        clearPin();
+      }
+    }
+
+    // SAAT VE TARİH GÜNCELLEME
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString("tr-TR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      });
+      const dateString = now.toLocaleDateString("tr-TR", {
+        day: "numeric",
+        month: "long",
+        weekday: "long"
+      });
+
+      document.getElementById("lockTime").innerText = timeString;
+      document.getElementById("lockDate").innerText = dateString;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ORİJİNAL CODEPEN JS KODLARI
     const delay = 300;
     let afterResize;
     let currentStyle;
