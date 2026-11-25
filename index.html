@@ -313,11 +313,12 @@ function closeApp() {
   }
 
   bar.addEventListener('touchstart', start, { passive: true });
-  bar.addEventListener('touchmove', move, { passive: true });
-  bar.addEventListener('touchend', end);
+  window.addEventListener('touchmove', move, { passive: true });
+  window.addEventListener('touchend', end);
   bar.addEventListener('mousedown', start);
-  document.addEventListener('mousemove', move);
-  document.addEventListener('mouseup', end);
+  window.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+})();
 })();
 </script>
 
