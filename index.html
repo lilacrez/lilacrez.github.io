@@ -1080,13 +1080,11 @@
         activeApp.classList.remove("open");
         activeApp.style.transform = "";
       }
-      document.getElementById("waChatView").classList.remove("active");
+      const chatView = document.getElementById("waChatView");
+      if(chatView) chatView.classList.remove("active");
+      
       const mainScreen = document.querySelector(".mainScreen");
       if (mainScreen) mainScreen.classList.remove("blurred");
     };
-    }
-    }
-    </script>
-  </script>
 </body>
 </html>
