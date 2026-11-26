@@ -1017,7 +1017,10 @@
       if (!isDragging) return;
       isDragging = false;
       
-      let diffY = currentY - startY;
+      // kaydırmalar
+      const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+      let diffY = clientY - startY;
+
       const activeApp = document.querySelector(".whatsapp-app");
       const mainScreen = document.querySelector(".mainScreen");
       
@@ -1025,6 +1028,7 @@
 
       activeApp.style.transition = "transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)";
 
+      // Eğer 60 pikselden fazla yukarı kaydırdıysan ana ekrana fırlat kanka
       if (diffY < -60) {
         activeApp.style.transform = "translateY(-100%)";
         setTimeout(() => {
@@ -1033,9 +1037,11 @@
           if (mainScreen) mainScreen.classList.remove("blurred");
         }, 300);
       } else {
+        // Yeterince çekmediyse eski yerine geri gelsin
         activeApp.style.transform = "translateY(0)";
         if (mainScreen) mainScreen.classList.remove("blurred");
       }
+    }
     }
     </script>
   </script>
