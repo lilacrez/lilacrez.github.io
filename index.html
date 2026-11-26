@@ -468,7 +468,7 @@
     .wa-send-btn { background-color: #00a884; color: #0b141a; border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
     /* Alt Home Bar Çubuğu */
-    .home-bar-container { position: absolute; bottom: 4px; left: 0; width: 100%; height: 14px; display: flex; justify-content: center; align-items: center; z-index: 300; cursor: pointer; }
+    .home-bar-container { position: absolute; bottom: 4px; left: 0; width: 100%; height: 14px; display: flex; justify-content: center; align-items: center; z-index: 300; cursor: pointer; touch-action: none; }
     .home-bar { width: 110px; height: 4px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; }
     .wa-back-btn { color: #00a884; cursor: pointer; display: flex; align-items: center; padding-right: 2px; }
     .wa-chat-icons { display: flex; align-items: center; gap: 14px; color: #00a884; }
@@ -638,9 +638,11 @@
               </div>
 
               <!-- Ana Ekrana Dönüş Çubuğu (Home Bar) -->
-              <div class="home-bar-container" onclick="closeAllApps()">
-                <div class="home-bar"></div>
-              </div>
+              <div class="home-bar-container" 
+     ontouchstart="startDrag(event)" ontouchmove="onDrag(event)" ontouchend="endDrag(event)"
+     onmousedown="startDrag(event)" onmousemove="onDrag(event)" onmouseup="endDrag(event)">
+  <div class="home-bar"></div>
+</div>
   <script>
     // ŞİFRE SİSTEMİ (7900)
     let enteredPin = "";
@@ -948,6 +950,55 @@
       document.getElementById("whatsappApp").classList.remove("open");
       document.getElementById("waChatView").classList.remove("active");
     };
+    window.closeAllApps = function() {
+      document.getElementById("whatsappApp").classList.remove("open");
+      document.getElementById("waChatView").classList.remove("active");
+    };
+
+    // Kaydırma fonksiyonları:
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+
+    function startDrag(e) {
+      isDragging = true;
+      startY = e.touches ? e.touches[0].clientY : e.clientY;
+      const activeApp = document.querySelector(".app-window.open") || document.getElementById("whatsappApp");
+      if (activeApp) {
+        activeApp.style.transition = "none";
+      }
+    }
+
+    function onDrag(e) {
+      if (!isDragging) return;
+      currentY = e.touches ? e.touches[0].clientY : e.clientY;
+      let diffY = currentY - startY;
+
+      if (diffY < 0) {
+        const activeApp = document.querySelector(".app-window.open") || document.getElementById("whatsappApp");
+        if (activeApp) {
+          activeApp.style.transform = `translateY(${diffY}px)`;
+        }
+      }
+    }
+
+    function endDrag(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      let diffY = currentY - startY;
+      const activeApp = document.querySelector(".app-window.open") || document.getElementById("whatsappApp");
+      if (!activeApp) return;
+
+      activeApp.style.transition = "transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)";
+
+      if (diffY < -70) {
+        closeAllApps();
+      } else {
+        activeApp.style.transform = "translateY(0)";
+      }
+    }
+    </script>
   </script>
 </body>
 </html>
