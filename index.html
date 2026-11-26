@@ -662,7 +662,43 @@
                   </div>
                 </div>
               </div>
+<!-- GALERI UYGULAMASI -->
+              <div class="whatsapp-app" id="galeriApp" style="background-color: #000; color: #fff;">
+                <div class="wa-main-header">
+                  <div class="wa-big-title">Galeri</div>
+                </div>
+                <div style="padding: 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; overflow-y: auto; flex: 1;">
+                  <div style="background: #222; height: 120px; border-radius: 10px; background-size: cover; background-position: center; background-image: url('foto1.jpg');"></div>
+                  <div style="background: #222; height: 120px; border-radius: 10px; background-size: cover; background-position: center; background-image: url('foto2.jpg');"></div>
+                </div>
+              </div>
 
+              <!-- TAKVİM UYGULAMASI -->
+              <div class="whatsapp-app" id="takvimApp" style="background-color: #fff; color: #000;">
+                <div class="wa-main-header" style="background-color: #f6f6f6; color: #000;">
+                  <div class="wa-big-title" style="color: #000;">Takvim</div>
+                </div>
+                <div style="padding: 20px; flex: 1;">
+                  <p>Şubat 2026 - Etkinlikler ve planlar burada görünecek.</p>
+                </div>
+              </div>
+
+              <!-- TELEFON UYGULAMASI -->
+              <div class="whatsapp-app" id="telefonApp" style="background-color: #000; color: #fff;">
+                <div class="wa-main-header">
+                  <div class="wa-big-title">Son Aramalar</div>
+                </div>
+                <div style="padding: 10px 20px; flex: 1; overflow-y: auto;">
+                  <div style="padding: 12px 0; border-bottom: 0.5px solid #333; display: flex; justify-content: space-between;">
+                    <span>Odette</span>
+                    <span style="color: #888;">Dün</span>
+                  </div>
+                  <div style="padding: 12px 0; border-bottom: 0.5px solid #333; display: flex; justify-content: space-between;">
+                    <span>Yoongi</span>
+                    <span style="color: #888;">Önceki Gün</span>
+                  </div>
+                </div>
+              </div>
               <!-- Ana Ekrana Dönüş Çubuğu (Home Bar) -->
               <div class="home-bar-container" 
      ontouchstart="startDrag(event)" ontouchmove="onDrag(event)" ontouchend="endDrag(event)"
