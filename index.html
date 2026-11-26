@@ -572,7 +572,7 @@
                 </div>
                 <div class="wrapperDots"></div>
                 <div class="deckApps">
-                  <div class="app"><div class="icono" style="background-image: url(galeri.jpg);"></div></div>
+                  <div class="app" onclick="openGaleri()"><div class="icono" style="background-image: url(galeri.jpg);"></div></div>
                   <div class="app" onclick="openWhatsApp()"><div class="icono" style="background-image: url(whatsapp.jpg);"></div></div>
                   <div class="app"><div class="icono" style="background-image: url(telefon.jpg);"></div></div>
                   <div class="app"><div class="icono" style="background-image: url(takvim.jpg);"></div></div>
@@ -1020,7 +1020,7 @@
       document.getElementById("galeriApp").classList.remove("open");
     document.getElementById("photoViewer").classList.remove("active");
 };
-    };
+    
     // Galeriyi Açma
   window.openGaleri = function() {
     document.getElementById("galeriApp").classList.add("open");
