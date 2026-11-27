@@ -1254,16 +1254,47 @@
 
     function checkPin() {
       if (enteredPin === correctPin) {
+        // 1. Kilit ekranını gizle
         document.getElementById("customLockScreen").classList.add("hidden");
         
+        // 2. Ana ekranı görünür yap
         const appScreen = document.querySelector(".appScreen");
         if (appScreen) {
           appScreen.classList.remove("hidden");
         }
 
-        if (typeof renderizarUI === 'function') {
-          renderizarUI();
+        // 3. Uygulama ikonlarını ve alt noktaları doğrudan ekrana yükle
+        const apps = [
+          { nombre: 'Spotify', icono: 'Spotify.jpg' },
+          { nombre: 'Gmail', icono: 'Gmail.jpg' },
+          { nombre: 'X', icono: 'twitter.jpg' },
+          { nombre: 'Notes', icono: 'Notes.jpg' },
+          { nombre: 'Instagram', icono: 'insta.jpg' },
+          { nombre: 'Calculator', icono: 'hesapmakinesi.jpg' },
+          { nombre: 'Maps', icono: 'harita.jpg' },
+          { nombre: 'Camera', icono: 'camera.jpg' },
+          { nombre: 'TikTok', icono: 'TikTok.jpg' },
+          { nombre: 'Letterboxd', icono: 'Letterboxd.jpg' },
+          { nombre: 'App Store', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fappstore.png?alt=media&token=fe121a13-738f-43cd-936b-45ee7fb90cec' },
+          { nombre: 'Salud', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fsalud.png?alt=media&token=fee7445d-600c-4146-a590-1adc1d40001b' }
+        ];
+
+        let html = '<div class="grupo">';
+        apps.forEach(app => {
+          html += `<div class="app"><div class="icono" style="background-image:url(${app.icono});"></div><p class="nombre">${app.nombre}</p></div>`;
+        });
+        html += '</div>';
+
+        const wrapperApps = document.querySelector('.wrapperApps');
+        if (wrapperApps) {
+          wrapperApps.innerHTML = html;
         }
+
+        const wrapperDots = document.querySelector('.wrapperDots');
+        if (wrapperDots) {
+          wrapperDots.innerHTML = '<div class="dot-indicator activo"></div>';
+        }
+
       } else {
         alert("Incorrect Password");
         clearPin();
