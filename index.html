@@ -1255,7 +1255,15 @@
     function checkPin() {
       if (enteredPin === correctPin) {
         document.getElementById("customLockScreen").classList.add("hidden");
-        document.querySelector(".appScreen").classList.remove("hidden");
+        
+        const appScreen = document.querySelector(".appScreen");
+        if (appScreen) {
+          appScreen.classList.remove("hidden");
+        }
+
+        if (typeof renderizarUI === 'function') {
+          renderizarUI();
+        }
       } else {
         alert("Incorrect Password");
         clearPin();
@@ -1277,6 +1285,7 @@
     updateClock();
 
     // UYGULAMA LİSTESİ
+    let renderizarUI;
     $(function(){
       const globalState = {
         apps: [
