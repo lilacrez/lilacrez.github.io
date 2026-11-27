@@ -1276,20 +1276,25 @@
   outline: none;
   line-height: 1.4;
 }
-    .notes-list::-webkit-scrollbar,
-.note-content-input::-webkit-scrollbar {
+    /* Tüm uygulama ve pencereler için şeffaf kaydırma çubuğu */
+*::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
-.notes-list::-webkit-scrollbar-track,
-.note-content-input::-webkit-scrollbar-track {
-  background: transparent; /* Arkadaki beyaz alanı şeffaf yapar */
+*::-webkit-scrollbar-track {
+  background: transparent !important;
 }
 
-.notes-list::-webkit-scrollbar-thumb,
-.note-content-input::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2); /* Kaydırma çubuğunun kendisi */
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25) !important;
   border-radius: 10px;
+}
+
+/* Firefox tarayıcısı için */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
