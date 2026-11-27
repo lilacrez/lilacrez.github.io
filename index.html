@@ -1276,6 +1276,21 @@
   outline: none;
   line-height: 1.4;
 }
+    .notes-list::-webkit-scrollbar,
+.note-content-input::-webkit-scrollbar {
+  width: 5px;
+}
+
+.notes-list::-webkit-scrollbar-track,
+.note-content-input::-webkit-scrollbar-track {
+  background: transparent; /* Arkadaki beyaz alanı şeffaf yapar */
+}
+
+.notes-list::-webkit-scrollbar-thumb,
+.note-content-input::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2); /* Kaydırma çubuğunun kendisi */
+  border-radius: 10px;
+}
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
