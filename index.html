@@ -1256,6 +1256,9 @@
       if (enteredPin === correctPin) {
         document.getElementById("customLockScreen").classList.add("hidden");
         document.querySelector(".appScreen").classList.remove("hidden");
+        console.log("appScreen:", document.querySelector(".appScreen").getBoundingClientRect());
+console.log("appScreen display:", getComputedStyle(document.querySelector(".appScreen")).display);
+console.log("appScreen visibility:", getComputedStyle(document.querySelector(".appScreen")).visibility);
       } else {
         alert("Incorrect Password");
         clearPin();
