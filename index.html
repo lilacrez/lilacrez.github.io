@@ -1759,7 +1759,7 @@ console.log("appScreen visibility:", getComputedStyle(document.querySelector(".a
   
 container.innerHTML = '<div class="grupo">' +
   globalState.apps.map(app =>
-    `<div class="app" ${app.nombre === 'Letterboxd' ? 'onclick="openLetterboxd()"' : ''} ${app.nombre === 'Notes' ? 'onclick="openNotes()"' : ''}>`
+    `<div class="app" ${app.nombre === 'Letterboxd' ? 'onclick="openLetterboxd()"' : ''} ${app.nombre === 'Notes' ? 'onclick="openNotes()"' : ''}>
       <div class="icono" style="background-image:url('${app.icono}')"></div>
       <p class="nombre">${app.nombre}</p>
     </div>`
