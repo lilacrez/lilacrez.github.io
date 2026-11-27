@@ -918,187 +918,6 @@
 .phone-tab-bar div {
   cursor: pointer;
 }
-    
-/* LETTERBOXD UYGULAMASI */
-
-.letterboxd-app {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  background: #14181c;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transform: translateY(100%);
-  visibility: hidden;
-  transition: transform 0.35s ease, visibility 0.35s;
-}
-
-.letterboxd-app.open {
-  transform: translateY(0);
-  visibility: visible;
-}
-
-.lb-profile-page {
-  display: none;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding-bottom: 15px;
-}
-
-.lb-profile-page.active {
-  display: block;
-}
-
-.lb-topbar {
-  height: 52px;
-  padding: 0 17px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #1c2228;
-}
-
-.lb-logo {
-  color: #00c46a;
-  font-size: 21px;
-  font-weight: bold;
-  letter-spacing: -1px;
-}
-
-.lb-top-icon {
-  font-size: 22px;
-  color: #cccccc;
-}
-
-.lb-back {
-  color: white;
-  background: transparent;
-  border: none;
-  font-size: 32px;
-  cursor: pointer;
-}
-
-.lb-profile-header {
-  text-align: center;
-  padding: 25px 15px 20px;
-  background: #1c2228;
-}
-
-.lb-avatar {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #00c46a;
-}
-
-.lb-profile-header h2 {
-  font-size: 20px;
-  margin: 12px 0 6px;
-}
-
-.lb-bio {
-  font-size: 12px;
-  color: #aeb7bd;
-  margin: 0 0 22px;
-}
-
-.lb-stats {
-  display: flex;
-  justify-content: center;
-  gap: 38px;
-}
-
-.lb-stats div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.lb-stats strong {
-  font-size: 17px;
-  color: #ffffff;
-}
-
-.lb-stats small {
-  font-size: 9px;
-  color: #9da7ad;
-}
-
-.lb-tabs {
-  display: flex;
-  justify-content: space-around;
-  padding: 17px 5px 13px;
-  border-bottom: 1px solid #303940;
-  background: #1c2228;
-}
-
-.lb-tabs span {
-  font-size: 10px;
-  color: #9da7ad;
-  font-weight: bold;
-}
-
-.lb-tabs span.active {
-  color: #00c46a;
-  border-bottom: 2px solid #00c46a;
-  padding-bottom: 8px;
-}
-
-.lb-section-title {
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  padding: 20px 14px 12px;
-}
-
-.lb-film-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 3px;
-  padding: 0 5px;
-}
-
-.lb-film-poster {
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  display: block;
-  background: #293139;
-  border-radius: 3px;
-}
-
-.lb-bottom-nav {
-  height: 58px;
-  flex-shrink: 0;
-  background: #1c2228;
-  border-top: 1px solid #303940;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.lb-bottom-nav div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  color: #9da7ad;
-}
-
-.lb-bottom-nav span {
-  font-size: 21px;
-}
-
-.lb-bottom-nav small {
-  font-size: 8px;
-}
-
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -1270,119 +1089,6 @@
   </div>
 
 </div>
-  
-<!-- LETTERBOXD UYGULAMASI -->
-<div class="letterboxd-app app-window" id="letterboxdApp">
-
-  <!-- ANA PROFİL -->
-  <div class="lb-profile-page" id="lbMainProfile">
-
-    <div class="lb-topbar">
-      <span class="lb-logo">letterboxd</span>
-      <span class="lb-top-icon">☰</span>
-    </div>
-
-    <div class="lb-profile-header">
-      <img class="lb-avatar" src="profil.jpg" alt="Profil fotoğrafı">
-
-      <h2>kullaniciadi</h2>
-      <p class="lb-bio">films, feelings & everything in between.</p>
-
-      <div class="lb-stats">
-        <div>
-          <strong>11</strong>
-          <small>FILMS</small>
-        </div>
-        <div>
-          <strong>1</strong>
-          <small>FOLLOWING</small>
-        </div>
-        <div onclick="openLbSecondProfile()">
-          <strong>1</strong>
-          <small>FOLLOWERS</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="lb-tabs">
-      <span class="active">FILMS</span>
-      <span>REVIEWS</span>
-      <span>LISTS</span>
-      <span>JOURNAL</span>
-    </div>
-
-    <div class="lb-section-title">FILMS</div>
-
-    <div class="lb-film-grid" id="lbMainFilms"></div>
-
-  </div>
-
-  <!-- İKİNCİ PROFİL -->
-  <div class="lb-profile-page lb-second-profile" id="lbSecondProfile">
-
-    <div class="lb-topbar">
-      <button class="lb-back" onclick="backToLbMain()">‹</button>
-      <span class="lb-logo">letterboxd</span>
-      <span></span>
-    </div>
-
-    <div class="lb-profile-header">
-      <img class="lb-avatar" src="ikinci-profil.jpg" alt="Profil fotoğrafı">
-
-      <h2>ikinci_kullanici</h2>
-      <p class="lb-bio">somewhere between cinema and reality.</p>
-
-      <div class="lb-stats">
-        <div>
-          <strong>8</strong>
-          <small>FILMS</small>
-        </div>
-        <div>
-          <strong>1</strong>
-          <small>FOLLOWING</small>
-        </div>
-        <div>
-          <strong>1</strong>
-          <small>FOLLOWERS</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="lb-tabs">
-      <span class="active">FILMS</span>
-      <span>REVIEWS</span>
-      <span>LISTS</span>
-      <span>JOURNAL</span>
-    </div>
-
-    <div class="lb-section-title">FILMS</div>
-
-    <div class="lb-film-grid" id="lbSecondFilms"></div>
-
-  </div>
-
-  <!-- ALT MENÜ -->
-  <div class="lb-bottom-nav">
-    <div>
-      <span>⌂</span>
-      <small>HOME</small>
-    </div>
-    <div>
-      <span>▦</span>
-      <small>FILMS</small>
-    </div>
-    <div>
-      <span>＋</span>
-      <small>LOG</small>
-    </div>
-    <div>
-      <span>◉</span>
-      <small>PROFILE</small>
-    </div>
-  </div>
-
-</div>
-
               <!-- WHATSAPP ARAYÜZÜ -->
               <div class="whatsapp-app app-window" id="whatsappApp">
                 <div class="wa-main-header">
@@ -1596,7 +1302,7 @@
         
         let html = '<div class="grupo">';
         apps.map((app) => {
-          html += `<div class="app" ${app.nombre === 'Letterboxd' ? 'onclick="openLetterboxd()"' : ''}><div class="icono" style="background-image:url(${app.icono});"></div><p class="nombre">${app.nombre}</p></div>`;
+          html += `<div class="app"><div class="icono" style="background-image:url(${app.icono});"></div><p class="nombre">${app.nombre}</p></div>`;
         });
         html += '</div>';
         container.append(html);
@@ -1608,16 +1314,11 @@
       }
 
       function encendido(){
-  renderizarUI();
-
-  document.querySelectorAll('.appScreen').forEach(screen => {
-    screen.classList.remove('hidden');
-  });
-
-  setTimeout(() => {
-    $('.iphone').removeClass('initAnimation');
-  }, 500);
-}
+        renderizarUI();
+        setTimeout(() => {
+          $('.iphone').removeClass('initAnimation');
+        }, 500);
+      }
 
       encendido();
     });
@@ -2176,35 +1877,6 @@ function endPhoneCall() {
   document.getElementById("phoneCallScreen").classList.remove("active");
 
   renderPhoneHistory();
-}
-    
-/* LETTERBOXD PROFİL GEÇİŞLERİ */
-
-window.openLetterboxd = function() {
-
-  document.querySelectorAll(".app-window").forEach(app => {
-    app.classList.remove("open");
-    app.classList.remove("active");
-  });
-
-  const letterboxd = document.getElementById("letterboxdApp");
-
-  if (!letterboxd) return;
-
-  letterboxd.classList.add("open");
-
-  document.getElementById("lbMainProfile").classList.add("active");
-  document.getElementById("lbSecondProfile").classList.remove("active");
-};
-
-function openLbSecondProfile() {
-  document.getElementById("lbMainProfile").classList.remove("active");
-  document.getElementById("lbSecondProfile").classList.add("active");
-}
-
-function backToLbMain() {
-  document.getElementById("lbSecondProfile").classList.remove("active");
-  document.getElementById("lbMainProfile").classList.add("active");
 }
   </script>
 </body>
