@@ -135,7 +135,7 @@
     .dot { width: 12px; height: 12px; border: 2px solid white; border-radius: 50%; background: transparent; transition: 0.2s; }
     .dot.filled { background: white; }
 
-    /* Tuş Takımı Boyutları Küçültüldü ve Sabitlendi */
+    /* Tuş Takımı Boyutları */
     .keypad { 
       display: grid; 
       grid-template-columns: repeat(3, 1fr); 
@@ -1123,6 +1123,159 @@
   margin: 0;
 }
 
+    /* IPHONE NOTLAR UYGULAMASI */
+.notes-app {
+  position: absolute;
+  inset: 0;
+  z-index: 230;
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0.35s;
+}
+
+.notes-app.open {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.notes-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #1c1c1e;
+  padding: 40px 16px 20px;
+  box-sizing: border-box;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.notes-header h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.notes-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note-item {
+  background: #2c2c2e;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.note-item:active {
+  background: #3a3a3c;
+}
+
+.note-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.note-snippet {
+  font-size: 13px;
+  color: #8e8e93;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notes-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #38383a;
+  color: #8e8e93;
+  font-size: 13px;
+}
+
+.notes-new-btn {
+  background: none;
+  border: none;
+  color: #ff9f0a;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* NOT DÜZENLEME EKRANI */
+.note-editor {
+  position: absolute;
+  inset: 0;
+  background: #1c1c1e;
+  z-index: 240;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 16px 20px;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.note-editor.active {
+  transform: translateX(0);
+}
+
+.note-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.note-back-btn {
+  background: none;
+  border: none;
+  color: #ff9f0a;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.note-title-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.note-content-input {
+  width: 100%;
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #d1d1d6;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+  line-height: 1.4;
+}
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -1454,7 +1607,31 @@
   </div>
 </div>
 
+<!-- NOTLAR UYGULAMASI -->
+<div class="notes-app app-window" id="notesApp">
+  <div class="notes-main">
+    <div class="notes-header">
+      <h1>Notlar</h1>
+    </div>
+    <div class="notes-list" id="notesList">
+      <!-- Notlar buraya dinamik eklenecek -->
+    </div>
+    <div class="notes-footer">
+      <span id="notesCountText">0 Not</span>
+      <button class="notes-new-btn" onclick="createNewNote()">Yeni Not ✏️</button>
+    </div>
+  </div>
 
+  <!-- Not Düzenleme Ekranı -->
+  <div class="note-editor" id="noteEditor">
+    <div class="note-editor-header">
+      <button class="note-back-btn" onclick="closeNoteEditor()">‹ Notlar</button>
+      <button class="note-back-btn" onclick="saveCurrentNote()" style="color: #ff9f0a;">Bitti</button>
+    </div>
+    <input type="text" id="noteTitleInput" class="note-title-input" placeholder="Başlık...">
+    <textarea id="noteContentInput" class="note-content-input" placeholder="Notunuzu buraya yazın..."></textarea>
+  </div>
+</div>
               <!-- Ana Ekrana Dönüş Çubuğu (Home Bar) -->
 <div class="home-bar-container" id="homeBar">
     <div class="home-bar"></div>
@@ -1582,7 +1759,7 @@ console.log("appScreen visibility:", getComputedStyle(document.querySelector(".a
   
 container.innerHTML = '<div class="grupo">' +
   globalState.apps.map(app =>
-    `<div class="app" ${app.nombre === 'Letterboxd' ? 'onclick="openLetterboxd()"' : ''}>
+    `<div class="app" ${app.nombre === 'Letterboxd' ? 'onclick="openLetterboxd()"' : ''} ${app.nombre === 'Notes' ? 'onclick="openNotes()"' : ''}>`
       <div class="icono" style="background-image:url('${app.icono}')"></div>
       <p class="nombre">${app.nombre}</p>
     </div>`
@@ -1799,17 +1976,76 @@ container.innerHTML = '<div class="grupo">' +
     };
 
     window.closeAllApps = function() {
-      document.getElementById("whatsappApp").classList.remove("open");
-      document.getElementById("waChatView").classList.remove("active");
-    };
-    window.openLetterboxd = function() {
-  document.getElementById("letterboxdApp").classList.add("open");
+  document.getElementById("whatsappApp").classList.remove("open");
+  document.getElementById("waChatView").classList.remove("active");
+  document.getElementById("letterboxdApp").classList.remove("open");
+  document.getElementById("notesApp").classList.remove("open");
+  document.getElementById("noteEditor").classList.remove("active");
 };
 
 window.closeLetterboxd = function() {
   document.getElementById("letterboxdApp").classList.remove("open");
 };
-    // IPHONE ANA EKRANA DÖNÜŞ SİSTEMİ
+    // NOTLAR UYGULAMASI MANTIĞI
+let notesData = [
+  { title: "Alışveriş Listesi", content: "- Süt\n- Yumurta\n- Ekmek" },
+  { title: "Fikirler", content: "iOS simülatörüne yeni özellikler eklenecek." }
+];
+let currentEditingIndex = null;
+
+window.openNotes = function() {
+  document.querySelectorAll(".app-window").forEach(app => {
+    app.classList.remove("open");
+    app.classList.remove("active");
+  });
+  document.getElementById("notesApp").classList.add("open");
+  renderNotesList();
+};
+
+function renderNotesList() {
+  const listEl = document.getElementById("notesList");
+  const countEl = document.getElementById("notesCountText");
+  listEl.innerHTML = "";
+
+  notesData.forEach((note, index) => {
+    listEl.innerHTML += `
+      <div class="note-item" onclick="openNoteEditor(${index})">
+        <div class="note-title">${note.title || "İsimsiz Not"}</div>
+        <div class="note-snippet">${note.content || "Boş not..."}</div>
+      </div>
+    `;
+  });
+  countEl.textContent = notesData.length + " Not";
+}
+
+window.createNewNote = function() {
+  notesData.unshift({ title: "Yeni Not", content: "" });
+  renderNotesList();
+  openNoteEditor(0);
+};
+
+function openNoteEditor(index) {
+  currentEditingIndex = index;
+  const note = notesData[index];
+  document.getElementById("noteTitleInput").value = note.title;
+  document.getElementById("noteContentInput").value = note.content;
+  document.getElementById("noteEditor").classList.add("active");
+}
+
+window.closeNoteEditor = function() {
+  saveCurrentNote();
+  document.getElementById("noteEditor").classList.remove("active");
+  renderNotesList();
+};
+
+window.saveCurrentNote = function() {
+  if (currentEditingIndex !== null && notesData[currentEditingIndex]) {
+    notesData[currentEditingIndex].title = document.getElementById("noteTitleInput").value;
+    notesData[currentEditingIndex].content = document.getElementById("noteContentInput").value;
+    renderNotesList();
+  }
+};
+    //ANA EKRANA DÖNÜŞ
 
 function goHome() {
   document.querySelectorAll('.app-window').forEach(app => {
