@@ -918,6 +918,211 @@
 .phone-tab-bar div {
   cursor: pointer;
 }
+    
+/* LETTERBOXD */
+
+.letterboxd-app {
+  position: absolute;
+  inset: 0;
+  z-index: 250;
+  background: #14181c;
+  color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  font-family: Arial, sans-serif;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform .3s ease, visibility .3s ease;
+}
+
+.letterboxd-app.open {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.lb-header {
+  height: 55px;
+  min-height: 55px;
+  background: #1c252d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 17px;
+  border-bottom: 1px solid #303940;
+}
+
+.lb-logo {
+  color: #9dc8a3;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+}
+
+.lb-header button {
+  border: none;
+  background: transparent;
+  color: #e5e5e5;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.lb-content {
+  padding: 20px 16px 35px;
+}
+
+.lb-profile-cover {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0 20px;
+}
+
+.lb-avatar {
+  width: 76px;
+  height: 76px;
+  min-width: 76px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #527b62, #263b31);
+  border: 3px solid #9dc8a3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, serif;
+  font-size: 35px;
+  color: white;
+}
+
+.lb-user-info h1 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  margin: 0 0 7px;
+  color: #fff;
+}
+
+.lb-user-info p {
+  color: #b5bdc3;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 0 0 7px;
+}
+
+.lb-location {
+  color: #9dc8a3;
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+
+.lb-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  border-top: 1px solid #303940;
+  border-bottom: 1px solid #303940;
+}
+
+.lb-stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.lb-stats strong {
+  font-size: 19px;
+  color: #fff;
+}
+
+.lb-stats span {
+  font-size: 9px;
+  color: #9da8ae;
+  letter-spacing: 1px;
+}
+
+.lb-tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 19px 0;
+  border-bottom: 1px solid #303940;
+}
+
+.lb-tabs span {
+  color: #929da4;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: .5px;
+}
+
+.lb-tabs span.selected {
+  color: #9dc8a3;
+  border-bottom: 2px solid #9dc8a3;
+  padding-bottom: 7px;
+}
+
+.lb-section-title {
+  color: #e7e9e9;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  margin: 25px 0 13px;
+  font-weight: 700;
+}
+
+.lb-section-title span {
+  color: #9dc8a3;
+}
+
+.lb-poster-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.lb-poster {
+  aspect-ratio: 2 / 3;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #344b45, #17231f 65%, #405c4d);
+  border: 1px solid #52685c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+  color: #d8e8dc;
+  font-family: Georgia, serif;
+  font-size: 10px;
+  letter-spacing: .5px;
+  box-shadow: 0 3px 8px #0006;
+}
+
+.lb-following-card {
+  margin-top: 30px;
+  padding: 17px;
+  background: #202a30;
+  border-left: 3px solid #9dc8a3;
+  border-radius: 5px;
+}
+
+.lb-following-card > span {
+  color: #9dc8a3;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.lb-following-card h3 {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  margin: 10px 0 5px;
+}
+
+.lb-following-card p {
+  color: #a9b5b9;
+  font-size: 11px;
+  margin: 0;
+}
+
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -1182,6 +1387,73 @@
                   </div>
                 </div>
               </div>
+              
+<!-- LETTERBOXD ARAYÜZÜ -->
+<div class="letterboxd-app app-window" id="letterboxdApp">
+
+  <div class="lb-header">
+    <span class="lb-logo">letterboxd</span>
+    <button onclick="closeLetterboxd()">✕</button>
+  </div>
+
+  <div class="lb-content">
+
+    <div class="lb-profile-cover">
+      <div class="lb-avatar">A</div>
+      <div class="lb-user-info">
+        <h1>filmlover</h1>
+        <p>Movies, memories & everything in between.</p>
+        <span class="lb-location">✦ Film enthusiast</span>
+      </div>
+    </div>
+
+    <div class="lb-stats">
+      <div><strong>128</strong><span>FILMS</span></div>
+      <div><strong>46</strong><span>REVIEWS</span></div>
+      <div><strong>2</strong><span>FOLLOWING</span></div>
+    </div>
+
+    <div class="lb-tabs">
+      <span class="selected">FILMS</span>
+      <span>REVIEWS</span>
+      <span>LISTS</span>
+      <span>JOURNAL</span>
+    </div>
+
+    <h2 class="lb-section-title">FAVORITE FILMS <span>✦</span></h2>
+
+    <div class="lb-poster-grid">
+      <div class="lb-poster">POSTER 01</div>
+      <div class="lb-poster">POSTER 02</div>
+      <div class="lb-poster">POSTER 03</div>
+      <div class="lb-poster">POSTER 04</div>
+    </div>
+
+    <h2 class="lb-section-title">RECENT ACTIVITY</h2>
+    <div class="lb-poster-grid">
+      <div class="lb-poster">POSTER 05</div>
+      <div class="lb-poster">POSTER 06</div>
+      <div class="lb-poster">POSTER 07</div>
+      <div class="lb-poster">POSTER 08</div>
+    </div>
+
+    <h2 class="lb-section-title">MORE ACTIVITY</h2>
+    <div class="lb-poster-grid">
+      <div class="lb-poster">POSTER 09</div>
+      <div class="lb-poster">POSTER 10</div>
+      <div class="lb-poster">POSTER 11</div>
+      <div class="lb-poster">POSTER 12</div>
+    </div>
+
+    <div class="lb-following-card">
+      <span>FOLLOWING</span>
+      <h3>♡ secondprofile</h3>
+      <p>View profile →</p>
+    </div>
+
+  </div>
+</div>
+
 
               <!-- Ana Ekrana Dönüş Çubuğu (Home Bar) -->
 <div class="home-bar-container" id="homeBar">
@@ -1307,14 +1579,16 @@ console.log("appScreen visibility:", getComputedStyle(document.querySelector(".a
     return;
   }
 
-  container.innerHTML = '<div class="grupo">' +
-    globalState.apps.map(app =>
-      `<div class="app">
-        <div class="icono" style="background-image:url('${app.icono}')"></div>
-        <p class="nombre">${app.nombre}</p>
-      </div>`
-    ).join('') +
-    '</div>';
+  
+container.innerHTML = '<div class="grupo">' +
+  globalState.apps.map(app =>
+    `<div class="app" ${app.nombre === 'Letterboxd' ? 'onclick="openLetterboxd()"' : ''}>
+      <div class="icono" style="background-image:url('${app.icono}')"></div>
+      <p class="nombre">${app.nombre}</p>
+    </div>`
+  ).join('') +
+  '</div>';
+
 
   dots.innerHTML = '<div class="dot-indicator activo"></div>';
 
@@ -1528,6 +1802,13 @@ console.log("appScreen visibility:", getComputedStyle(document.querySelector(".a
       document.getElementById("whatsappApp").classList.remove("open");
       document.getElementById("waChatView").classList.remove("active");
     };
+    window.openLetterboxd = function() {
+  document.getElementById("letterboxdApp").classList.add("open");
+};
+
+window.closeLetterboxd = function() {
+  document.getElementById("letterboxdApp").classList.remove("open");
+};
     // IPHONE ANA EKRANA DÖNÜŞ SİSTEMİ
 
 function goHome() {
