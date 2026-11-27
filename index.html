@@ -924,7 +924,7 @@
 .letterboxd-app {
   position: absolute;
   inset: 0;
-  z-index: 220;
+  z-index: 20;
   background: #14181c;
   color: #ffffff;
   font-family: Arial, sans-serif;
@@ -1608,11 +1608,16 @@
       }
 
       function encendido(){
-        renderizarUI();
-        setTimeout(() => {
-          $('.iphone').removeClass('initAnimation');
-        }, 500);
-      }
+  renderizarUI();
+
+  document.querySelectorAll('.appScreen').forEach(screen => {
+    screen.classList.remove('hidden');
+  });
+
+  setTimeout(() => {
+    $('.iphone').removeClass('initAnimation');
+  }, 500);
+}
 
       encendido();
     });
@@ -2176,14 +2181,16 @@ function endPhoneCall() {
 /* LETTERBOXD PROFİL GEÇİŞLERİ */
 
 window.openLetterboxd = function() {
+
   document.querySelectorAll(".app-window").forEach(app => {
-    if (app.id !== "mainScreen") {
-      app.classList.remove("open");
-      app.classList.remove("active");
-    }
+    app.classList.remove("open");
+    app.classList.remove("active");
   });
 
   const letterboxd = document.getElementById("letterboxdApp");
+
+  if (!letterboxd) return;
+
   letterboxd.classList.add("open");
 
   document.getElementById("lbMainProfile").classList.add("active");
@@ -2199,7 +2206,6 @@ function backToLbMain() {
   document.getElementById("lbSecondProfile").classList.remove("active");
   document.getElementById("lbMainProfile").classList.add("active");
 }
-
   </script>
 </body>
 </html>
