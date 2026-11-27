@@ -499,6 +499,168 @@
       filter: blur(8px);
       transition: filter 0.3s ease;
     }
+    
+/* IPHONE FOTOĞRAFLAR UYGULAMASI */
+
+.photos-app {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  background: #ffffff;
+  color: #111111;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0.35s;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+.photos-app.open {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.photos-library {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: #ffffff;
+}
+
+.photos-header {
+  flex-shrink: 0;
+  padding: 18px 15px 12px;
+  background: #ffffff;
+}
+
+.photos-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photos-small-label {
+  font-size: 13px;
+  color: #888888;
+}
+
+.photos-select {
+  color: #007aff;
+  font-size: 15px;
+}
+
+.photos-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 8px 0 18px;
+}
+
+.photos-filter {
+  display: flex;
+  align-items: center;
+  padding-bottom: 4px;
+}
+
+.photos-filter button {
+  border: none;
+  background: transparent;
+  color: #777777;
+  font-size: 13px;
+  padding: 7px 10px;
+  border-radius: 20px;
+}
+
+.photos-filter button.selected {
+  background: #e8e8ed;
+  color: #111111;
+  font-weight: 600;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  padding: 0 2px 12px;
+  overflow-y: auto;
+  flex: 1;
+  align-content: start;
+  -webkit-overflow-scrolling: touch;
+}
+
+.photo-thumb {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #eeeeee;
+  cursor: pointer;
+}
+
+.photo-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+  background: #000000;
+  color: #ffffff;
+}
+
+.photo-viewer.active {
+  display: flex;
+}
+
+.photo-viewer-header {
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  padding-top: env(safe-area-inset-top, 0px);
+  font-size: 14px;
+}
+
+.photo-back {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 38px;
+  line-height: 1;
+  padding: 0 12px 5px 0;
+  cursor: pointer;
+}
+
+.photo-viewer-image {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo-viewer-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -549,6 +711,49 @@
                 <div class="leftSide"><span class="operador">KT케이티</span></div>
                 <div class="rightSide">LTE</div>
               </div>
+              
+<!-- FOTOĞRAFLAR UYGULAMASI -->
+<div class="photos-app app-window" id="photosApp">
+
+  <!-- KÜTÜPHANE EKRANI -->
+  <div class="photos-library" id="photosLibrary">
+
+    <div class="photos-header">
+      <div class="photos-header-top">
+        <span class="photos-small-label">Fotoğraflar</span>
+        <span class="photos-select" id="photosCount">0 Fotoğraf</span>
+      </div>
+
+      <h1>Kütüphane</h1>
+
+      <div class="photos-filter">
+        <button class="selected" data-filter="all">Tüm Fotoğraflar</button>
+        <button data-filter="days">Günler</button>
+        <button data-filter="months">Aylar</button>
+      </div>
+    </div>
+
+    <div class="photos-grid" id="photosGrid"></div>
+
+  </div>
+
+  <!-- TEK FOTOĞRAFIN BÜYÜK GÖRÜNÜMÜ -->
+  <div class="photo-viewer" id="photoViewer">
+
+    <div class="photo-viewer-header">
+      <button class="photo-back" id="photoBack" aria-label="Geri">‹</button>
+      <span id="photoCounter"></span>
+      <span></span>
+    </div>
+
+    <div class="photo-viewer-image">
+      <img id="largePhoto" src="" alt="Fotoğraf">
+    </div>
+
+  </div>
+
+</div>
+
               <!-- WHATSAPP ARAYÜZÜ -->
               <div class="whatsapp-app app-window" id="whatsappApp">
                 <div class="wa-main-header">
@@ -653,10 +858,24 @@
                 </div>
                 <div class="wrapperDots"></div>
                 <div class="deckApps">
-                  <div class="app"><div class="icono" style="background-image: url(galeri.jpg);"></div></div>
-                  <div class="app" onclick="openWhatsApp()"><div class="icono" style="background-image: url(whatsapp.jpg);"></div></div>
-                  <div class="app"><div class="icono" style="background-image: url(telefon.jpg);"></div></div>
-                  <div class="app"><div class="icono" style="background-image: url(takvim.jpg);"></div></div>
+
+  <div class="app" onclick="openPhotos()">
+    <div class="icono" style="background-image: url(galeri.jpg);"></div>
+  </div>
+
+  <div class="app" onclick="openWhatsApp()">
+    <div class="icono" style="background-image: url(whatsapp.jpg);"></div>
+  </div>
+
+  <div class="app">
+    <div class="icono" style="background-image: url(telefon.jpg);"></div>
+  </div>
+
+  <div class="app">
+    <div class="icono" style="background-image: url(takvim.jpg);"></div>
+  </div>
+
+</div>
                 </div>
               </div>
             </div>
@@ -1010,6 +1229,108 @@ if (homeBar) {
     }
   });
 }
+    
+// FOTOĞRAF LİNKLERİ
+
+const photoLinks = `
+https://kullanici.github.io/fotograflar/foto1.jpg
+https://kullanici.github.io/fotograflar/foto2.jpg
+https://kullanici.github.io/fotograflar/foto1.jpg
+`.split(/\r?\n/).map(link => link.trim()).filter(Boolean);
+
+
+// FOTOĞRAFLARI GALERİYE YERLEŞTİR
+
+function renderPhotos() {
+  const grid = document.getElementById("photosGrid");
+  const count = document.getElementById("photosCount");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  photoLinks.forEach((url, index) => {
+    const button = document.createElement("button");
+    button.className = "photo-thumb";
+    button.type = "button";
+
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "Fotoğraf " + (index + 1);
+    img.loading = "lazy";
+
+    button.appendChild(img);
+
+    button.addEventListener("click", function() {
+      openLargePhoto(index);
+    });
+
+    grid.appendChild(button);
+  });
+
+  if (count) {
+    count.textContent = photoLinks.length + " Fotoğraf";
+  }
+}
+
+
+// BÜYÜK FOTOĞRAFI AÇ
+
+function openLargePhoto(index) {
+  const viewer = document.getElementById("photoViewer");
+  const image = document.getElementById("largePhoto");
+  const counter = document.getElementById("photoCounter");
+
+  if (!viewer || !image || !photoLinks[index]) return;
+
+  image.src = photoLinks[index];
+  counter.textContent = (index + 1) + " / " + photoLinks.length;
+
+  viewer.classList.add("active");
+}
+
+
+// FOTOĞRAFTAN KÜTÜPHANEYE GERİ DÖN
+
+document.getElementById("photoBack").addEventListener("click", function() {
+  document.getElementById("photoViewer").classList.remove("active");
+  document.getElementById("largePhoto").src = "";
+});
+
+
+// GALERİ UYGULAMASINI AÇ
+
+// GALERİ UYGULAMASINI AÇ
+
+window.openPhotos = function() {
+
+  // Diğer uygulamaları kapat
+  document.querySelectorAll(".app-window").forEach(app => {
+    app.classList.remove("open");
+    app.classList.remove("active");
+  });
+
+  // WhatsApp sohbetini kapat
+  const chatView = document.getElementById("waChatView");
+  if (chatView) chatView.classList.remove("active");
+
+  // Önceden açılmış büyük fotoğrafı kapat
+  const viewer = document.getElementById("photoViewer");
+  if (viewer) viewer.classList.remove("active");
+
+  const largePhoto = document.getElementById("largePhoto");
+  if (largePhoto) largePhoto.src = "";
+
+  // Galeriyi aç
+  const photosApp = document.getElementById("photosApp");
+
+  if (photosApp) {
+    photosApp.classList.add("open");
+  }
+
+  renderPhotos();
+};
+
   </script>
 </body>
 </html>
