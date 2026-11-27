@@ -1988,11 +1988,25 @@ window.closeLetterboxd = function() {
 };
     // NOTLAR UYGULAMASI MANTIĞI
 let notesData = [
-  { title: "Alışveriş Listesi", content: "- Süt\n- Yumurta\n- Ekmek" },
-  { title: "Fikirler", content: "iOS simülatörüne yeni özellikler eklenecek." }
+  { 
+    title: "Kasıtlı İtaatsizlik Cilt 3", 
+    content: `Egemenlik kurumlarına karşı mücadelede saldırı şarttır. Bu toplumsal düzeni dayatan toplumsal ilişkiler alt üst edilmeli ve bu da egemen düzenin projelerinin ve yapılarının yıkılmasını gerektirir. Toplumsal ayaklanmaya ve devrime doğru ilerlemek için bu tür saldırıların genişlemesi ve genelleşmesi gerektiği doğru olsa da, bu gerekliliği şimdi hiçbir şey yapmamak için bir bahane olarak kullanmak saçmadır. Hayatlarımızı yoksullaştıran ve bu dünyayı zehirleyen bu toplumsal gerçeklikle karşı karşıya olduğumuzda, her isyan eylemi haklıdır. Ancak yaygın toplumsal ayaklanmanın olmadığı yerlerde, bir yoldaşımızın "yıkım uzmanları" ve "devrim uzmanları" olarak adlandırdığı bir rol veya imaj yaratmamak büyük önem taşır.
+
+Bu uzmanlaşmış rolün oluşmasında rol oynayabilecek birçok faktör vardır. Vandalizm, sabotaj ve yıkıcı saldırı eylemleri, aslında yabancılaşmaya, toplumsal varoluşun gerçeklerinden duyulan hayal kırıklığına ve çoğu ilişkinin metalaştırıldığı ve çoğu maceranın yasaklandığı bir hayattan duyulan can sıkıntısına verilen nispeten yaygın tepkiler olduğundan, bu uzmanlaşmaya yol açan şeyin bilinçli devrimcilerin ve anarşistlerin bu tür eylemleri gerçekleştirmesi olmadığı açıktır. Aksine, sorun, saldırıların ardındaki sosyal, siyasi veya ahlaki gündemin ele alınış biçiminde yatmaktadır.
+
+Devrimci dayanışma özünde ahlaki, mali veya fiziksel destek meselesi değil, çok daha derin bir şeydir, çünkü özünde bencil bir merkeze dayanır. Devrimci dayanışmanın temeli, kendi isyan projesini başkalarının mücadelelerinde ve eylemlerinde tanımak ve böylece bu diğerlerini, en azından potansiyel olarak, mücadelede suç ortakları olarak görmekte yatar.
+
+Dolayısıyla, devrimci dayanışma ancak filizlenebileceği net bir isyan projesi olduğunda var olabilir. İsyancı anarşist projenin doğası, her türlü tahakküm ve sömürüyle açık bir çatışma içinde kendi yaşamını yeniden sahiplenmektir; mevcut toplumsal ilişkilerin devrilmesi, tüm hiyerarşi ve otoritenin ve meta sisteminin yıkılması ve böylece özgür birliktelik için en geniş olanakların açılmasıdır. Sömürülen bir birey olarak hayatımı geri almak için mücadele eden ve bilinçli bir isyancı anarşist olarak benim devrimci dayanışmayı belirlemem ve ifade etmem de bu temele dayanmaktadır.` 
+  },
+  { 
+    title: "Anarşist Spekülasyonlar", 
+    content: `Anarko hyphenations'ın, hyphen'nin anarşist olmayan tarafını destekleme eğiliminde olduğuna ve kaçınılması gerektiğine inanıyorum. Anarko komünistler, anarşinin öfkeli gücünden ziyade ekonomiyle ilgili tartışmaları ve çalışmaları tercih etme eğilimindedir. Yeşil anarşistler, devlet ve kapitalizmle ilgili güç meselelerinden ziyade çevrecilik ve maneviyat konularını tartışma ve bu konular etrafında çalışma eğilimindedir. Anarko primitivizm de aynı kaderi paylaşıyor. Anarko primitivizmin iki modern ustası, anarşist eğilimli genelcilerden ziyade marjinal antropologlar veya ekopsikologlar için daha ilgi çekici konuları tartışıyorlar. 
+
+Bu hyphenation yükü, mutlaka olması gereken yol değil. Hyphenated pozisyonlar sadece bir tercihi belirtmenin, bir pozisyonun uç noktalarını ele almanın veya modern çağımızda birçok pozisyon taraftarının sessiz kalması gerçeğini telafi etmenin bir yolu olabilir. Yerlerini, hayatın onlara sunduğu sonsuz seçenekler arasında sağa sola kaydıran, ağzı laf dolu röntgencilere bıraktılar.` 
+  },
+  { title: "Aşk ve Anarşi", content: "- Süt\n- Yumurta\n- Ekmek" },
 ];
 let currentEditingIndex = null;
-
 window.openNotes = function() {
   document.querySelectorAll(".app-window").forEach(app => {
     app.classList.remove("open");
