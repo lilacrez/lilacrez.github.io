@@ -1277,51 +1277,47 @@
     updateClock();
 
     // UYGULAMA LİSTESİ
-    $(function(){
-      const globalState = {
-        apps: [
-          { nombre: 'Spotify', icono: 'Spotify.jpg' },
-          { nombre: 'Gmail', icono: 'Gmail.jpg' },
-          { nombre: 'X', icono: 'twitter.jpg' },
-          { nombre: 'Notes', icono: 'Notes.jpg' },
-          { nombre: 'Instagram', icono: 'insta.jpg' },
-          { nombre: 'Calculator', icono: 'hesapmakinesi.jpg' },
-          { nombre: 'Maps', icono: 'harita.jpg' },
-          { nombre: 'Camera', icono: 'camera.jpg' },
-          { nombre: 'TikTok', icono: 'TikTok.jpg' },
-          { nombre: 'Letterboxd', icono: 'Letterboxd.jpg' },
-          { nombre: 'App Store', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fappstore.png?alt=media&token=fe121a13-738f-43cd-936b-45ee7fb90cec' },
-          { nombre: 'Salud', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fsalud.png?alt=media&token=fee7445d-600c-4146-a590-1adc1d40001b' },
+    document.addEventListener("DOMContentLoaded", function() {
+  const globalState = {
+    apps: [
+      { nombre: 'Spotify', icono: 'Spotify.jpg' },
+      { nombre: 'Gmail', icono: 'Gmail.jpg' },
+      { nombre: 'X', icono: 'twitter.jpg' },
+      { nombre: 'Notes', icono: 'Notes.jpg' },
+      { nombre: 'Instagram', icono: 'insta.jpg' },
+      { nombre: 'Calculator', icono: 'hesapmakinesi.jpg' },
+      { nombre: 'Maps', icono: 'harita.jpg' },
+      { nombre: 'Camera', icono: 'camera.jpg' },
+      { nombre: 'TikTok', icono: 'TikTok.jpg' },
+      { nombre: 'Letterboxd', icono: 'Letterboxd.jpg' },
+      { nombre: 'App Store', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fappstore.png?alt=media&token=fe121a13-738f-43cd-936b-45ee7fb90cec' },
+      { nombre: 'Salud', icono: 'https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/ios14%2Fsalud.png?alt=media&token=fee7445d-600c-4146-a590-1adc1d40001b' }
+    ]
+  };
 
-        ]
-      };
+  const container = document.querySelector('.wrapperApps');
+  const dots = document.querySelector('.wrapperDots');
 
-      function pintarApps(apps, container, containerDots){
-        container.empty();
-        containerDots.empty();
-        
-        let html = '<div class="grupo">';
-        apps.map((app) => {
-          html += `<div class="app"><div class="icono" style="background-image:url(${app.icono});"></div><p class="nombre">${app.nombre}</p></div>`;
-        });
-        html += '</div>';
-        container.append(html);
-        containerDots.append(`<div class="dot-indicator activo"></div>`);
-      }
+  if (!container || !dots) {
+    console.error("Ana ekran uygulama alanları bulunamadı!");
+    return;
+  }
 
-      function renderizarUI(){
-        pintarApps(globalState.apps, $('.wrapperApps'), $('.wrapperDots'));
-      }
+  container.innerHTML = '<div class="grupo">' +
+    globalState.apps.map(app =>
+      `<div class="app">
+        <div class="icono" style="background-image:url('${app.icono}')"></div>
+        <p class="nombre">${app.nombre}</p>
+      </div>`
+    ).join('') +
+    '</div>';
 
-      function encendido(){
-        renderizarUI();
-        setTimeout(() => {
-          $('.iphone').removeClass('initAnimation');
-        }, 500);
-      }
+  dots.innerHTML = '<div class="dot-indicator activo"></div>';
 
-      encendido();
-    });
+  setTimeout(() => {
+    document.querySelector('.iphone')?.classList.remove('initAnimation');
+  }, 500);
+});
     // 10 KİŞİLİK WHATSAPP SOHBETLERİ
     const waChats = [
       {
@@ -1879,5 +1875,6 @@ function endPhoneCall() {
   renderPhoneHistory();
 }
   </script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 </html>
