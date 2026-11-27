@@ -550,7 +550,7 @@
                 <div class="rightSide">LTE</div>
               </div>
               <!-- WHATSAPP ARAYÜZÜ -->
-              <div class="whatsapp-app" id="whatsappApp">
+              <div class="whatsapp-app app-window" id="whatsappApp">
                 <div class="wa-main-header">
                   <div class="wa-top-actions">
                     <div class="wa-circle-btn">
@@ -643,10 +643,8 @@
               </div>
 
               <!-- Ana Ekrana Dönüş Çubuğu (Home Bar) -->
-              <div class="home-bar-container" 
-     ontouchstart="startDrag(event)" ontouchmove="onDrag(event)" ontouchend="endDrag(event)"
-     onmousedown="startDrag(event)" onmousemove="onDrag(event)" onmouseup="endDrag(event)">
-  <div class="home-bar"></div>
+<div class="home-bar-container" id="homeBar">
+    <div class="home-bar"></div>
 </div>
 
               <div class="appScreen hidden">
@@ -976,6 +974,42 @@
       document.getElementById("whatsappApp").classList.remove("open");
       document.getElementById("waChatView").classList.remove("active");
     };
+    // IPHONE ANA EKRANA DÖNÜŞ SİSTEMİ
+
+function goHome() {
+  document.querySelectorAll('.app-window').forEach(app => {
+    app.classList.remove('open');
+    app.classList.remove('active');
+  });
+
+  window.closeAllApps();
+
+  const homeScreen = document.querySelector('.mainScreen');
+  if (homeScreen) {
+    homeScreen.style.display = '';
+  }
+}
+
+// ALT ÇİZGİYİ YUKARI KAYDIRMA
+
+const homeBar = document.getElementById('homeBar');
+
+if (homeBar) {
+  let startY = 0;
+
+  homeBar.addEventListener('pointerdown', function(e) {
+    startY = e.clientY;
+    homeBar.setPointerCapture(e.pointerId);
+  });
+
+  homeBar.addEventListener('pointerup', function(e) {
+    const distance = startY - e.clientY;
+
+    if (distance > 40) {
+      goHome();
+    }
+  });
+}
   </script>
 </body>
 </html>
