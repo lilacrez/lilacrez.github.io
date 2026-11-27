@@ -2177,8 +2177,10 @@ function endPhoneCall() {
 
 window.openLetterboxd = function() {
   document.querySelectorAll(".app-window").forEach(app => {
-    app.classList.remove("open");
-    app.classList.remove("active");
+    if (app.id !== "mainScreen") {
+      app.classList.remove("open");
+      app.classList.remove("active");
+    }
   });
 
   const letterboxd = document.getElementById("letterboxdApp");
