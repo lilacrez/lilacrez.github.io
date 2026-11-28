@@ -919,22 +919,35 @@
   cursor: pointer;
 }
     
-/* LETTERBOXD */
+/* =================================
+   LETTERBOXD YENİ TASARIM
+================================= */
+
+.letterboxd-app,
+.letterboxd-app * {
+  box-sizing: border-box;
+}
 
 .letterboxd-app {
   position: absolute;
   inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
   z-index: 250;
   background: #14181c;
-  color: #f2f2f2;
+  color: #e9e9e9;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   font-family: Arial, sans-serif;
   transform: translateY(100%);
   visibility: hidden;
   transition: transform .3s ease, visibility .3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: #52615d #14181c;
 }
 
 .letterboxd-app.open {
@@ -943,184 +956,334 @@
 }
 
 .lb-header {
-  height: 55px;
-  min-height: 55px;
-  background: #1c252d;
+  height: 54px;
+  min-height: 54px;
+  width: 100%;
+  background: #202830;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 17px;
-  border-bottom: 1px solid #303940;
+  border-bottom: 1px solid #354047;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .lb-logo {
   color: #9dc8a3;
-  font-size: 23px;
+  font-size: 24px;
   font-weight: 800;
-  letter-spacing: -1.2px;
+  letter-spacing: -1.3px;
 }
 
 .lb-header button {
   border: none;
   background: transparent;
-  color: #e5e5e5;
+  color: #eee;
   font-size: 23px;
   cursor: pointer;
 }
 
 .lb-content {
-  padding: 20px 16px 35px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0 0 35px;
+  overflow-x: hidden;
 }
 
-.lb-profile-cover {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 0 20px;
+/* PROFİL KAPAK FOTOĞRAFI */
+
+.lb-cover {
+  width: 100%;
+  height: 155px;
+  background:
+    linear-gradient(120deg, #394b49, #202c30 55%, #52605b);
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #394448;
+}
+
+/* PROFİL BAŞLIĞI */
+
+.lb-profile-heading {
+  text-align: center;
+  padding: 0 16px 19px;
+  position: relative;
 }
 
 .lb-avatar {
-  width: 76px;
-  height: 76px;
-  min-width: 76px;
+  width: 94px;
+  height: 94px;
+  margin: -47px auto 10px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #527b62, #263b31);
-  border: 3px solid #9dc8a3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Georgia, serif;
-  font-size: 35px;
+  border: 4px solid #14181c;
+  background: linear-gradient(145deg, #a6b8ad, #435c50);
   color: white;
-}
-
-.lb-user-info h1 {
-  font-family: Georgia, serif;
-  font-size: 24px;
-  margin: 0 0 7px;
-  color: #fff;
-}
-
-.lb-user-info p {
-  color: #b5bdc3;
-  font-size: 11px;
-  line-height: 1.5;
-  margin: 0 0 7px;
-}
-
-.lb-location {
-  color: #9dc8a3;
-  font-size: 10px;
-  letter-spacing: .5px;
-}
-
-.lb-stats {
   display: flex;
-  justify-content: space-around;
-  padding: 15px 0;
-  border-top: 1px solid #303940;
-  border-bottom: 1px solid #303940;
-}
-
-.lb-stats div {
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 5px;
+  font-family: Georgia, serif;
+  font-size: 40px;
+  box-shadow: 0 2px 12px #0008;
 }
 
-.lb-stats strong {
-  font-size: 19px;
+.lb-profile-heading h1 {
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 600;
+  margin: 5px 0 7px;
   color: #fff;
 }
 
-.lb-stats span {
-  font-size: 9px;
-  color: #9da8ae;
-  letter-spacing: 1px;
+.lb-profile-heading p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #aab3b6;
+  margin: 0;
 }
+
+/* PROFİL SEKME ÇUBUĞU */
 
 .lb-tabs {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 19px 0;
-  border-bottom: 1px solid #303940;
+  justify-content: space-around;
+  align-items: center;
+  gap: 4px;
+  padding: 15px 7px;
+  border-top: 1px solid #303a40;
+  border-bottom: 1px solid #303a40;
+  overflow: hidden;
 }
 
 .lb-tabs span {
-  color: #929da4;
+  color: #aab2b6;
   font-size: 10px;
   font-weight: bold;
-  letter-spacing: .5px;
+  letter-spacing: .4px;
+  white-space: nowrap;
+  padding: 7px 3px;
 }
 
 .lb-tabs span.selected {
-  color: #9dc8a3;
-  border-bottom: 2px solid #9dc8a3;
-  padding-bottom: 7px;
+  color: #a5d5ae;
+  border-bottom: 2px solid #a5d5ae;
 }
+
+/* FİLM BÖLÜMLERİ */
 
 .lb-section-title {
-  color: #e7e9e9;
+  color: #dce2df;
   font-size: 12px;
-  letter-spacing: 1.4px;
-  margin: 25px 0 13px;
+  letter-spacing: 1.7px;
   font-weight: 700;
+  margin: 24px 15px 13px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #303a40;
 }
 
-.lb-section-title span {
-  color: #9dc8a3;
-}
+/* POSTER IZGARASI */
 
 .lb-poster-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 9px;
+  padding: 0 13px;
+  width: 100%;
 }
 
 .lb-poster {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 0;
+  width: 100%;
   aspect-ratio: 2 / 3;
   border-radius: 4px;
-  background: linear-gradient(145deg, #344b45, #17231f 65%, #405c4d);
-  border: 1px solid #52685c;
+  border: 1px solid #47544e;
+  background: linear-gradient(145deg, #40564c, #1c2925 65%, #52685a);
+  color: #e5eee8;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 5px;
-  box-sizing: border-box;
-  color: #d8e8dc;
+  padding: 4px;
   font-family: Georgia, serif;
-  font-size: 10px;
-  letter-spacing: .5px;
-  box-shadow: 0 3px 8px #0006;
+  font-size: 9px;
+  letter-spacing: .4px;
+  box-shadow: 0 3px 9px #0007;
+  cursor: pointer;
+  overflow: hidden;
 }
 
+.lb-poster:active {
+  transform: scale(.97);
+}
+
+/* TAKİP EDİLEN TEK KİŞİ */
+
 .lb-following-card {
-  margin-top: 30px;
-  padding: 17px;
+  margin: 30px 14px 5px;
+  padding: 16px;
   background: #202a30;
-  border-left: 3px solid #9dc8a3;
-  border-radius: 5px;
+  border-top: 1px solid #354148;
+  border-bottom: 1px solid #354148;
 }
 
 .lb-following-card > span {
-  color: #9dc8a3;
-  font-size: 9px;
-  letter-spacing: 1.5px;
+  display: block;
+  color: #a5d5ae;
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  margin-bottom: 13px;
 }
 
-.lb-following-card h3 {
+.lb-following-card button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lb-small-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #879a91, #354a40);
   font-family: Georgia, serif;
-  font-size: 18px;
-  margin: 10px 0 5px;
+  font-size: 21px;
 }
 
-.lb-following-card p {
-  color: #a9b5b9;
+.lb-following-card button strong,
+.lb-following-card button small {
+  display: block;
+}
+
+.lb-following-card button strong {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.lb-following-card button small {
+  font-size: 10px;
+  color: #aab5b6;
+}
+
+/* FİLM İNCELEME EKRANI */
+
+.lb-back-button {
+  display: block;
+  margin: 18px 15px;
+  padding: 9px 12px;
+  background: #263239;
+  color: #b6d9bd;
+  border: 1px solid #46534e;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: .7px;
+  cursor: pointer;
+}
+
+.lb-review-content {
+  display: flex;
+  gap: 17px;
+  align-items: flex-start;
+  padding: 10px 16px 22px;
+}
+
+.lb-review-poster {
+  width: 112px;
+  min-width: 112px;
+  aspect-ratio: 2 / 3;
+  background: linear-gradient(145deg, #53685c, #17221e);
+  border: 1px solid #53685c;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  font-family: Georgia, serif;
   font-size: 11px;
-  margin: 0;
+}
+
+.lb-review-info {
+  min-width: 0;
+  padding-top: 5px;
+}
+
+.lb-review-info h1 {
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  line-height: 1.25;
+  margin: 0 0 7px;
+}
+
+.lb-review-info p {
+  color: #9ca9aa;
+  font-size: 11px;
+  margin: 5px 0 10px;
+}
+
+.lb-stars {
+  color: #f1c75b;
+  font-size: 20px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.lb-review-text {
+  margin: 0 16px;
+  padding: 17px;
+  background: #202a30;
+  border-left: 3px solid #9dc8a3;
+  border-radius: 3px;
+}
+
+.lb-review-text span {
+  color: #a5d5ae;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+.lb-review-text p {
+  color: #e0e4e1;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+}
+
+/* KÜÇÜK EKRAN GÜVENLİĞİ */
+
+@media (max-width: 360px) {
+  .lb-poster-grid {
+    gap: 6px;
+    padding: 0 10px;
+  }
+
+  .lb-tabs span {
+    font-size: 9px;
+  }
+
+  .lb-review-poster {
+    width: 98px;
+    min-width: 98px;
+  }
 }
 
     /* IPHONE NOTLAR UYGULAMASI */
@@ -1571,62 +1734,139 @@
 
   <div class="lb-content">
 
-    <div class="lb-profile-cover">
-      <div class="lb-avatar">A</div>
-      <div class="lb-user-info">
-        <h1>filmlover</h1>
-        <p>Movies, memories & everything in between.</p>
-        <span class="lb-location">✦ Film enthusiast</span>
+    <!-- IC4RUS PROFİLİ -->
+    <div class="lb-profile-page" id="profileIc4rus">
+
+      <div class="lb-cover">
+        <!-- KAPAK FOTOĞRAFINI SONRADAN EKLEYECEĞİZ -->
       </div>
+
+      <div class="lb-profile-heading">
+        <div class="lb-avatar">i</div>
+        <h1>ic4rus</h1>
+        <p>Movies, memories & everything in between.</p>
+      </div>
+
+      <div class="lb-tabs">
+        <span class="selected">PROFILE</span>
+        <span>DIARY</span>
+        <span>REVIEWS</span>
+        <span>LISTS</span>
+      </div>
+
+      <h2 class="lb-section-title">FAVORITES</h2>
+
+      <div class="lb-poster-grid">
+        <button class="lb-poster" onclick="openFilm('ic-fav-1')">FILM 01</button>
+        <button class="lb-poster" onclick="openFilm('ic-fav-2')">FILM 02</button>
+        <button class="lb-poster" onclick="openFilm('ic-fav-3')">FILM 03</button>
+        <button class="lb-poster" onclick="openFilm('ic-fav-4')">FILM 04</button>
+      </div>
+
+      <h2 class="lb-section-title">RECENT ACTIVITY</h2>
+
+      <div class="lb-poster-grid">
+        <button class="lb-poster" onclick="openFilm('ic-recent-1')">FILM 05</button>
+        <button class="lb-poster" onclick="openFilm('ic-recent-2')">FILM 06</button>
+        <button class="lb-poster" onclick="openFilm('ic-recent-3')">FILM 07</button>
+        <button class="lb-poster" onclick="openFilm('ic-recent-4')">FILM 08</button>
+      </div>
+
+      <div class="lb-following-card">
+        <span>FOLLOWING</span>
+        <button onclick="showProfile('od3tte')">
+          <span class="lb-small-avatar">o</span>
+          <span>
+            <strong>od3tte</strong>
+            <small>View profile →</small>
+          </span>
+        </button>
+      </div>
+
     </div>
 
-    <div class="lb-stats">
-      <div><strong>128</strong><span>FILMS</span></div>
-      <div><strong>46</strong><span>REVIEWS</span></div>
-      <div><strong>2</strong><span>FOLLOWING</span></div>
+
+    <!-- OD3TTE PROFİLİ -->
+    <div class="lb-profile-page" id="profileOd3tte" style="display:none;">
+
+      <div class="lb-cover">
+        <!-- İKİNCİ PROFİLİN KAPAK FOTOĞRAFINI SONRADAN EKLEYECEĞİZ -->
+      </div>
+
+      <div class="lb-profile-heading">
+        <div class="lb-avatar">o</div>
+        <h1>od3tte</h1>
+        <p>Some films stay with us forever.</p>
+      </div>
+
+      <div class="lb-tabs">
+        <span class="selected">PROFILE</span>
+        <span>DIARY</span>
+        <span>REVIEWS</span>
+        <span>LISTS</span>
+      </div>
+
+      <h2 class="lb-section-title">FAVORITES</h2>
+
+      <div class="lb-poster-grid">
+        <button class="lb-poster" onclick="openFilm('od-fav-1')">FILM 01</button>
+        <button class="lb-poster" onclick="openFilm('od-fav-2')">FILM 02</button>
+        <button class="lb-poster" onclick="openFilm('od-fav-3')">FILM 03</button>
+        <button class="lb-poster" onclick="openFilm('od-fav-4')">FILM 04</button>
+      </div>
+
+      <h2 class="lb-section-title">RECENT ACTIVITY</h2>
+
+      <div class="lb-poster-grid">
+        <button class="lb-poster" onclick="openFilm('od-recent-1')">FILM 05</button>
+        <button class="lb-poster" onclick="openFilm('od-recent-2')">FILM 06</button>
+        <button class="lb-poster" onclick="openFilm('od-recent-3')">FILM 07</button>
+        <button class="lb-poster" onclick="openFilm('od-recent-4')">FILM 08</button>
+      </div>
+
+      <div class="lb-following-card">
+        <span>FOLLOWING</span>
+        <button onclick="showProfile('ic4rus')">
+          <span class="lb-small-avatar">i</span>
+          <span>
+            <strong>ic4rus</strong>
+            <small>View profile →</small>
+          </span>
+        </button>
+      </div>
+
     </div>
 
-    <div class="lb-tabs">
-      <span class="selected">FILMS</span>
-      <span>REVIEWS</span>
-      <span>LISTS</span>
-      <span>JOURNAL</span>
-    </div>
 
-    <h2 class="lb-section-title">FAVORITE FILMS <span>✦</span></h2>
+    <!-- FİLM İNCELEME EKRANI -->
+    <div id="lbFilmView" style="display:none;">
 
-    <div class="lb-poster-grid">
-      <div class="lb-poster">POSTER 01</div>
-      <div class="lb-poster">POSTER 02</div>
-      <div class="lb-poster">POSTER 03</div>
-      <div class="lb-poster">POSTER 04</div>
-    </div>
+      <button class="lb-back-button" onclick="backToProfile()">
+        ← BACK TO PROFILE
+      </button>
 
-    <h2 class="lb-section-title">RECENT ACTIVITY</h2>
-    <div class="lb-poster-grid">
-      <div class="lb-poster">POSTER 05</div>
-      <div class="lb-poster">POSTER 06</div>
-      <div class="lb-poster">POSTER 07</div>
-      <div class="lb-poster">POSTER 08</div>
-    </div>
+      <div class="lb-review-content">
+        <div class="lb-review-poster" id="lbReviewPoster">
+          FILM POSTER
+        </div>
 
-    <h2 class="lb-section-title">MORE ACTIVITY</h2>
-    <div class="lb-poster-grid">
-      <div class="lb-poster">POSTER 09</div>
-      <div class="lb-poster">POSTER 10</div>
-      <div class="lb-poster">POSTER 11</div>
-      <div class="lb-poster">POSTER 12</div>
-    </div>
+        <div class="lb-review-info">
+          <h1 id="lbFilmTitle">Film title</h1>
+          <p id="lbFilmYear">2024</p>
+          <div class="lb-stars" id="lbFilmStars">★★★★☆</div>
+          <p id="lbFilmDate">Watched on</p>
+        </div>
+      </div>
 
-    <div class="lb-following-card">
-      <span>FOLLOWING</span>
-      <h3>♡ secondprofile</h3>
-      <p>View profile →</p>
+      <div class="lb-review-text">
+        <span>REVIEW</span>
+        <p id="lbFilmComment">Film yorumu burada görünecek.</p>
+      </div>
+
     </div>
 
   </div>
 </div>
-
 <!-- NOTLAR UYGULAMASI -->
 <div class="notes-app app-window" id="notesApp">
   <div class="notes-main">
@@ -2006,7 +2246,7 @@ container.innerHTML = '<div class="grupo">' +
 window.closeLetterboxd = function() {
   document.getElementById("letterboxdApp").classList.remove("open");
 };
-    // NOTLAR UYGULAMASI MANTIĞI
+    // NOTLAR
 let notesData = [
   { 
     title: "Kasıtlı İtaatsizlik Cilt 3", 
@@ -2403,7 +2643,7 @@ window.openPhone = function() {
 };
 
 
-// BİR KİŞİYİ ARA
+// BİRİNİ ARAMAK ICIN
 
 function callPhone(name) {
 
@@ -2421,7 +2661,7 @@ function callPhone(name) {
 }
 
 
-// ARAMAYI BİTİR
+// ARAMAYI BİTİRMEK ICIN
 
 function endPhoneCall() {
 
@@ -2429,6 +2669,129 @@ function endPhoneCall() {
 
   renderPhoneHistory();
 }
+    // ==========================================
+// LETTERBOXD UYGULAMASI JAVASCRIPT KISMI
+// ==========================================
+
+// Film veritabanı
+const lbFilmsData = {
+  // ic4rus profili - Favorites (4 film)
+  'ic-fav-1': { title: 'Portrait of a Lady on Fire', year: '2019', stars: '★★★★☆', date: 'Watched on 12 Oct 2023', comment: 'Gözlerin ve tabloların birbirine karıştığı, sessizliğin bile bir melodi gibi akıp gittiği muazzam bir görsel şölen.' },
+  'ic-fav-2': { title: 'Before Sunset', year: '2004', stars: '★★★★★', date: 'Watched on 15 Nov 2023', comment: 'Yıllar sonra Paris sokaklarında yeniden yürümek, o bitmeyen sohbetin orta yerinde kalmak gibi.' },
+  'ic-fav-3': { title: 'Howl’s Moving Castle', year: '2004', stars: '★★★★☆', date: 'Watched on 02 Dec 2023', comment: 'Miyazaki’nin sihirli dünyasında kaybolmamak elde değil. Kalbin ağırlığı ve hafifliği üzerine büyüleyici bir masal.' },
+  'ic-fav-4': { title: 'Persepolis', year: '2007', stars: '★★★★☆', date: 'Watched on 20 Dec 2023', comment: 'Siyah-beyaz çizgilerin ardındaki o büyük direnç ve çocuk kalmanın zorlukları çok etkileyici işlenmiş.' },
+
+  // ic4rus profili - Recent Activity (4 film)
+  'ic-recent-1': { title: 'We’re the Millers', year: '2013', stars: '★★★☆☆', date: 'Watched on 05 Jan 2024', comment: 'Kafayı dağıtmak için birebir, beklenmedik derecede eğlenceli ve absürt bir yol filmi komedisi.' },
+  'ic-recent-2': { title: 'Ocean’s 8', year: '2018', stars: '★★★☆☆', date: 'Watched on 10 Jan 2024', comment: 'Kadro harika, soygun planı akıcı ama biraz daha risk unsuru barındırabilirdi.' },
+  'ic-recent-3': { title: 'Happy Death Day', year: '2017', stars: '★★★☆☆', date: 'Watched on 14 Jan 2024', comment: 'Bugra girmüş bir döngüde geçen eğlenceli bir slasher-komedi karışımı.' },
+  'ic-recent-4': { title: 'Jumanji: Welcome to the Jungle', year: '2017', stars: '★★★★☆', date: 'Watched on 18 Jan 2024', comment: 'Çocukluk nostaljisini modern bir video oyunu konseptiyle çok tatlı harmanlamışlar.' },
+
+  // od3tte profili - Favorites & Recent (4 film)
+  'od-fav-1': { title: 'In the Mood for Love', year: '2000', stars: '★★★★★', date: 'Watched on 01 Jan 2024', comment: 'Koridorlarda geçen sessiz bakışmalar, unutulmayan melodiler ve bastırılmış tutkular...' },
+  'od-fav-2': { title: 'Blue Velvet', year: '1986', stars: '★★★★☆', date: 'Watched on 04 Jan 2024', comment: 'Görünen huzurlu kasabanın altındaki o karanlık ve tekinsiz tüneller...' },
+  'od-fav-3': { title: 'Chungking Express', year: '1994', stars: '★★★★★', date: 'Watched on 09 Jan 2024', comment: 'Hong Kong gecelerinin neon ışıkları altında kaybolan, tenha kalplerin hikayesi.' },
+  'od-fav-4': { title: 'Persona', year: '1966', stars: '★★★★★', date: 'Watched on 12 Jan 2024', comment: 'Sinema tarihinin kimlik, yüzler ve sessizlik üzerine yapılmış en sarsıcı denemelerinden biri.' },
+  'od-recent-1': { title: 'Climax', year: '2018', stars: '★★★☆☆', date: 'Watched on 15 Jan 2024', comment: 'Kusursuz bir kaos, adım adım deliliğe giden o ince kırmızı çizgi.' },
+  'od-recent-2': { title: 'Melancholia', year: '2011', stars: '★★★★☆', date: 'Watched on 19 Jan 2024', comment: 'Gezegen yaklaşırken ruhun içine çöken o kaçınılmaz ağır hüzün.' },
+  'od-recent-3': { title: 'Black Swan', year: '2010', stars: '★★★★☆', date: 'Watched on 22 Jan 2024', comment: 'Mükemmeliyetçiliğin ve hırsın insan zihnini nasıl parça parça ettiğinin dansı.' },
+  'od-recent-4': { title: 'The Double Life of Véronique', year: '1991', stars: '★★★★★', date: 'Watched on 25 Jan 2024', comment: 'Keeslowski’den müzikle ve sarı tonlarla örülmüş, ruh eşini arayan hayaletimsi bir başyapıt.' }
+};
+
+// Letterboxd uygulamasını açma
+window.openLetterboxd = function() {
+  document.querySelectorAll(".app-window").forEach(app => {
+    app.classList.remove("open");
+    app.classList.remove("active");
+  });
+  
+  // Sohbet veya büyük görselleri kapat
+  const chatView = document.getElementById("waChatView");
+  if (chatView) chatView.classList.remove("active");
+
+  const lbApp = document.getElementById("letterboxdApp");
+  if (lbApp) {
+    lbApp.classList.add("open");
+    // Varsayılan olarak ic4rus profilini göster, detay ekranını gizle
+    showProfile('ic4rus');
+  }
+};
+
+// Letterboxd uygulamasını kapatma
+window.closeLetterboxd = function() {
+  const lbApp = document.getElementById("letterboxdApp");
+  if (lbApp) lbApp.classList.remove("open");
+};
+
+// Profil değiştirme (ic4rus <-> od3tte)
+window.showProfile = function(profileName) {
+  const profileIc4rus = document.getElementById("profileIc4rus");
+  const profileOd3tte = document.getElementById("profileOd3tte");
+  const filmView = document.getElementById("lbFilmView");
+
+  // Önce film detay görünümünü kapat
+  if (filmView) filmView.style.display = "none";
+
+  if (profileName === 'ic4rus') {
+    if (profileIc4rus) profileIc4rus.style.display = "block";
+    if (profileOd3tte) profileOd3tte.style.display = "none";
+  } else if (profileName === 'od3tte' || profileName === 'od33te') {
+    if (profileIc4rus) profileIc4rus.style.display = "none";
+    if (profileOd3tte) profileOd3tte.style.display = "block";
+  }
+  
+  // İçerik kaydırma çubuğunu en üste al
+  const lbContent = document.querySelector('.lb-content');
+  if (lbContent) lbContent.scrollTop = 0;
+};
+
+// Filme tıklandığında detay / inceleme ekranını açma
+window.openFilm = function(filmKey) {
+  const filmData = lbFilmsData[filmKey];
+  if (!filmData) return;
+
+  // Profilleri gizle, film detay görünümünü aç
+  const profileIc4rus = document.getElementById("profileIc4rus");
+  const profileOd3tte = document.getElementById("profileOd3tte");
+  const filmView = document.getElementById("lbFilmView");
+
+  if (profileIc4rus) profileIc4rus.style.display = "none";
+  if (profileOd3tte) profileOd3tte.style.display = "none";
+  if (filmView) filmView.style.display = "block";
+
+  // Verileri DOM elementlerine yerleştir
+  document.getElementById("lbFilmTitle").innerText = filmData.title;
+  document.getElementById("lbFilmYear").innerText = filmData.year;
+  document.getElementById("lbFilmStars").innerText = filmData.stars;
+  document.getElementById("lbFilmDate").innerText = filmData.date;
+  document.getElementById("lbFilmComment").innerText = filmData.comment;
+  
+  // Poster kutusuna film adını yaz veya arka plan ekle
+  const reviewPoster = document.getElementById("lbReviewPoster");
+  if (reviewPoster) {
+    reviewPoster.innerText = filmData.title;
+  }
+
+  // Sayfanın en üstüne kaydır
+  const lbContent = document.querySelector('.lb-content');
+  if (lbContent) lbContent.scrollTop = 0;
+};
+
+// Film detayından profile geri dönme
+window.backToProfile = function() {
+  const filmView = document.getElementById("lbFilmView");
+  if (filmView) filmView.style.display = "none";
+
+  // Hangi profilde olduğumuzu kontrol ederek ilgili profili geri aç
+  const profileIc4rus = document.getElementById("profileIc4rus");
+  const profileOd3tte = document.getElementById("profileOd3tte");
+  
+  // Varsayılan olarak ic4rus'u göster (veya aktif olanı)
+  if (profileIc4rus) profileIc4rus.style.display = "block";
+  
+  const lbContent = document.querySelector('.lb-content');
+  if (lbContent) lbContent.scrollTop = 0;
+};
   </script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
