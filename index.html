@@ -1459,6 +1459,22 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
+    /* Patron Rozeti ve Bio Stili */
+.lb-patron-badge {
+  background-color: #00e054;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.lb-profile-heading p {
+  color: #9ab;
+  font-size: 13px;
+  text-align: center;
+}
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -1734,17 +1750,31 @@
 
   <div class="lb-content">
 
-    <!-- IC4RUS PROFİLİ -->
+    <!-- ========================================== -->
+    <!-- IC4RUS PROFİLİ (ANA PROFİL)                -->
+    <!-- ========================================== -->
     <div class="lb-profile-page" id="profileIc4rus">
 
-      <div class="lb-cover">
-        <!-- KAPAK FOTOĞRAFINI SONRADAN EKLEYECEĞİZ -->
-      </div>
+      <!-- Kapak Fotoğrafı -->
+      <div class="lb-cover" style="background-image: url('BURAYA_KAPAK_FOTOGRAFI.jpg');"></div>
 
       <div class="lb-profile-heading">
-        <div class="lb-avatar">i</div>
-        <h1>ic4rus</h1>
-        <p>Movies, memories & everything in between.</p>
+        <!-- Profil Fotoğrafı -->
+        <div class="lb-avatar" style="background-image: url('BURAYA_PROFIL_FOTOGRAFI.jpg');"></div>
+        
+        <!-- İsim ve Patron Rozeti -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px;">
+          <h1 style="margin: 0;">ic4rus</h1>
+          <span class="lb-patron-badge">PATRON</span>
+        </div>
+
+        <!-- Bio Alanı -->
+        <p style="margin-top: 8px; line-height: 1.6;">
+          📍 🌐 ᝰ.ᐟ. ocean blvd<br>
+          ୨୧ directed by David lynch ୨୧<br>
+          ˚₊‧꒰ ☕️ ꒱ ꕤ*.ﾟ<br>
+          °˖‎✧ ⠂| pinterest | srlzd | spotify | ୨*.°
+        </p>
       </div>
 
       <div class="lb-tabs">
@@ -1772,10 +1802,11 @@
         <button class="lb-poster" onclick="openFilm('ic-recent-4')">FILM 08</button>
       </div>
 
+      <!-- En Altta Odette'e Geçiş Kartı -->
       <div class="lb-following-card">
         <span>FOLLOWING</span>
         <button onclick="showProfile('od3tte')">
-          <span class="lb-small-avatar">o</span>
+          <span class="lb-small-avatar" style="background-image: url('ODETTE_KUCUK_PROFIL.jpg');">o</span>
           <span>
             <strong>od3tte</strong>
             <small>View profile →</small>
@@ -1786,17 +1817,25 @@
     </div>
 
 
-    <!-- OD3TTE PROFİLİ -->
+    <!-- ========================================== -->
+    <!-- OD3TTE PROFİLİ (TAKİP EDİLEN TEK KİŞİ)      -->
+    <!-- ========================================== -->
     <div class="lb-profile-page" id="profileOd3tte" style="display:none;">
 
-      <div class="lb-cover">
-        <!-- İKİNCİ PROFİLİN KAPAK FOTOĞRAFINI SONRADAN EKLEYECEĞİZ -->
-      </div>
+      <!-- Odette Kapak Fotoğrafı -->
+      <div class="lb-cover" style="background-image: url('ODETTE_KAPAK_FOTOGRAFI.jpg');"></div>
 
       <div class="lb-profile-heading">
-        <div class="lb-avatar">o</div>
-        <h1>od3tte</h1>
-        <p>Some films stay with us forever.</p>
+        <!-- Odette Profil Fotoğrafı -->
+        <div class="lb-avatar" style="background-image: url('ODETTE_BUYUK_PROFIL.jpg');"></div>
+        
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px;">
+          <h1 style="margin: 0;">od3tte</h1>
+        </div>
+
+        <p style="margin-top: 8px; line-height: 1.6;">
+          Some films stay with us forever. 🩰
+        </p>
       </div>
 
       <div class="lb-tabs">
@@ -1824,10 +1863,11 @@
         <button class="lb-poster" onclick="openFilm('od-recent-4')">FILM 08</button>
       </div>
 
+      <!-- En Altta Tekrar İcarus'a Geri Dönüş Kartı -->
       <div class="lb-following-card">
         <span>FOLLOWING</span>
         <button onclick="showProfile('ic4rus')">
-          <span class="lb-small-avatar">i</span>
+          <span class="lb-small-avatar" style="background-image: url('BURAYA_PROFIL_FOTOGRAFI.jpg');">i</span>
           <span>
             <strong>ic4rus</strong>
             <small>View profile →</small>
@@ -1836,7 +1876,6 @@
       </div>
 
     </div>
-
 
     <!-- FİLM İNCELEME EKRANI -->
     <div id="lbFilmView" style="display:none;">
