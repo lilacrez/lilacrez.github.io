@@ -1788,16 +1788,16 @@
 
       <div class="lb-poster-grid">
         <button class="lb-poster" onclick="openFilm('ic-fav-1')" style="background: url('requiemletterboxd.jpg') center/cover no-repeat !important; color: transparent;"></button>
-        <button class="lb-poster" onclick="openFilm('ic-fav-2')">FILM 02</button>
-        <button class="lb-poster" onclick="openFilm('ic-fav-3')">FILM 03</button>
-        <button class="lb-poster" onclick="openFilm('ic-fav-4')">FILM 04</button>
+        <button class="lb-poster" onclick="openFilm('ic-fav-2')" style="background: url('mulhollanddletterboxd.jpg') center/cover no-repeat !important; color: transparent;"></button>
+        <button class="lb-poster" onclick="openFilm('ic-fav-3')" style="background: url('lefoufolletletterboxd.jpg') center/cover no-repeat !important; color: transparent;"></button>
+        <button class="lb-poster" onclick="openFilm('ic-fav-4')" style="background: url('fallenletterboxd.jpg') center/cover no-repeat !important; color: transparent;"></button>
       </div>
 
       <h2 class="lb-section-title">RECENT ACTIVITY</h2>
 
       <div class="lb-poster-grid">
-        <button class="lb-poster" onclick="openFilm('ic-recent-1')">FILM 05</button>
-        <button class="lb-poster" onclick="openFilm('ic-recent-2')">FILM 06</button>
+        <button class="lb-poster" onclick="openFilm('ic-recent-1') "style="background: url('losthighwaylb.jpg') center/cover no-repeat !important; color: transparent;"></button>
+        <button class="lb-poster" onclick="openFilm('ic-recent-2')" style="background: url('icarusfilmletterboxd.jpg') center/cover no-repeat !important; color: transparent;"></button>
         <button class="lb-poster" onclick="openFilm('ic-recent-3')">FILM 07</button>
         <button class="lb-poster" onclick="openFilm('ic-recent-4')">FILM 08</button>
       </div>
@@ -2715,28 +2715,27 @@ function endPhoneCall() {
 // Film veritabanı
 const lbFilmsData = {
   // ic4rus profili - Favorites (4 film)
-  'ic-fav-1': { title: 'Requiem for a Dream', year: '2000', stars: '★★★★☆', date: 'Watched on 12 Oct 2023', comment: 'rahatsız edici. ne yazık ki rüya için asla bir ağıt yakılmayacağını düşünüyorum. çünkü onun yok oluşuna yas tutma fırsatımız olmadan bizi mahvedecek.' },
-  'ic-fav-2': { title: 'Before Sunset', year: '2004', stars: '★★★★★', date: 'Watched on 15 Nov 2023', comment: 'Yıllar sonra Paris sokaklarında yeniden yürümek, o bitmeyen sohbetin orta yerinde kalmak gibi.' },
-  'ic-fav-3': { title: 'Howl’s Moving Castle', year: '2004', stars: '★★★★☆', date: 'Watched on 02 Dec 2023', comment: 'Miyazaki’nin sihirli dünyasında kaybolmamak elde değil. Kalbin ağırlığı ve hafifliği üzerine büyüleyici bir masal.' },
-  'ic-fav-4': { title: 'Persepolis', year: '2007', stars: '★★★★☆', date: 'Watched on 20 Dec 2023', comment: 'Siyah-beyaz çizgilerin ardındaki o büyük direnç ve çocuk kalmanın zorlukları çok etkileyici işlenmiş.' },
+  'ic-fav-1': { title: 'Requiem for a Dream', year: '2000', stars: '★★★★☆', date: 'Watched on 12 Oct 2023', comment: 'bilmiyorum. belki de belirli kimyasalları üreten her şeye bağımlı olduğumuzu ve kontrol, mutluluk ve amaç yanılsamalarımızın ne kadar kırılgan olduğunu vurgulayan nihilist bir manifestodur', image: 'requiemletterboxd.jpg' },
+  'ic-fav-2': { title: 'Mulholland Drive', year: '2001', stars: '★★★★★', date: 'Watched on 15 Nov 2023', comment: 'sana anlatamayacağım kadar korkuyorum. herkesin içinde, tam orada, tezgahın yanında duruyorsun. hem rüyadasın hem de korkuyorsun. senin ne kadar korktuğunu görünce daha da korkuyorum,sonra da bunun ne olduğunu anlıyorum. buranın arkasında bir adam var. bunu yapan o. onu duvarın arkasından görebiliyorum. yüzünü görebiliyorum. umarım o yüzü bir daha asla, rüya dışında görmem.', image: 'mulhollanddletterboxd.jpg' },
+  'ic-fav-3': { title: 'Pierrot le Fou', year: '1965', stars: '★★★★☆', date: 'Watched on 02 Dec 2023', comment: 'Miyazaki’nin sihirli dünyasında kaybolmamak elde değil. Kalbin ağırlığı ve hafifliği üzerine büyüleyici bir masal.', image: 'howl.jpg' },
+  'ic-fav-4': { title: 'Persepolis', year: '2007', stars: '★★★★☆', date: 'Watched on 20 Dec 2023', comment: 'Siyah-beyaz çizgilerin ardındaki o büyük direnç ve çocuk kalmanın zorlukları çok etkileyici işlenmiş.', image: 'persepolis.jpg' },
 
   // ic4rus profili - Recent Activity (4 film)
-  'ic-recent-1': { title: 'We’re the Millers', year: '2013', stars: '★★★☆☆', date: 'Watched on 05 Jan 2024', comment: 'Kafayı dağıtmak için birebir, beklenmedik derecede eğlenceli ve absürt bir yol filmi komedisi.' },
-  'ic-recent-2': { title: 'Ocean’s 8', year: '2018', stars: '★★★☆☆', date: 'Watched on 10 Jan 2024', comment: 'Kadro harika, soygun planı akıcı ama biraz daha risk unsuru barındırabilirdi.' },
-  'ic-recent-3': { title: 'Happy Death Day', year: '2017', stars: '★★★☆☆', date: 'Watched on 14 Jan 2024', comment: 'Bugra girmüş bir döngüde geçen eğlenceli bir slasher-komedi karışımı.' },
-  'ic-recent-4': { title: 'Jumanji: Welcome to the Jungle', year: '2017', stars: '★★★★☆', date: 'Watched on 18 Jan 2024', comment: 'Çocukluk nostaljisini modern bir video oyunu konseptiyle çok tatlı harmanlamışlar.' },
+  'ic-recent-1': { title: 'We’re the Millers', year: '2013', stars: '★★★☆☆', date: 'Watched on 05 Jan 2024', comment: 'Kafayı dağıtmak için birebir, beklenmedik derecede eğlenceli ve absürt bir yol filmi komedisi.', image: 'millers.jpg' },
+  'ic-recent-2': { title: 'Ocean’s 8', year: '2018', stars: '★★★☆☆', date: 'Watched on 10 Jan 2024', comment: 'Kadro harika, soygun planı akıcı ama biraz daha risk unsuru barındırabilirdi.', image: 'oceans8.jpg' },
+  'ic-recent-3': { title: 'Happy Death Day', year: '2017', stars: '★★★☆☆', date: 'Watched on 14 Jan 2024', comment: 'Bugra girmüş bir döngüde geçen eğlenceli bir slasher-komedi karışımı.', image: 'happydeathday.jpg' },
+  'ic-recent-4': { title: 'Jumanji: Welcome to the Jungle', year: '2017', stars: '★★★★☆', date: 'Watched on 18 Jan 2024', comment: 'Çocukluk nostaljisini modern bir video oyunu konseptiyle çok tatlı harmanlamışlar.', image: 'jumanji.jpg' },
 
   // od3tte profili - Favorites & Recent (4 film)
-  'od-fav-1': { title: 'In the Mood for Love', year: '2000', stars: '★★★★★', date: 'Watched on 01 Jan 2024', comment: 'Koridorlarda geçen sessiz bakışmalar, unutulmayan melodiler ve bastırılmış tutkular...' },
-  'od-fav-2': { title: 'Blue Velvet', year: '1986', stars: '★★★★☆', date: 'Watched on 04 Jan 2024', comment: 'Görünen huzurlu kasabanın altındaki o karanlık ve tekinsiz tüneller...' },
-  'od-fav-3': { title: 'Chungking Express', year: '1994', stars: '★★★★★', date: 'Watched on 09 Jan 2024', comment: 'Hong Kong gecelerinin neon ışıkları altında kaybolan, tenha kalplerin hikayesi.' },
-  'od-fav-4': { title: 'Persona', year: '1966', stars: '★★★★★', date: 'Watched on 12 Jan 2024', comment: 'Sinema tarihinin kimlik, yüzler ve sessizlik üzerine yapılmış en sarsıcı denemelerinden biri.' },
-  'od-recent-1': { title: 'Climax', year: '2018', stars: '★★★☆☆', date: 'Watched on 15 Jan 2024', comment: 'Kusursuz bir kaos, adım adım deliliğe giden o ince kırmızı çizgi.' },
-  'od-recent-2': { title: 'Melancholia', year: '2011', stars: '★★★★☆', date: 'Watched on 19 Jan 2024', comment: 'Gezegen yaklaşırken ruhun içine çöken o kaçınılmaz ağır hüzün.' },
-  'od-recent-3': { title: 'Black Swan', year: '2010', stars: '★★★★☆', date: 'Watched on 22 Jan 2024', comment: 'Mükemmeliyetçiliğin ve hırsın insan zihnini nasıl parça parça ettiğinin dansı.' },
-  'od-recent-4': { title: 'The Double Life of Véronique', year: '1991', stars: '★★★★★', date: 'Watched on 25 Jan 2024', comment: 'Keeslowski’den müzikle ve sarı tonlarla örülmüş, ruh eşini arayan hayaletimsi bir başyapıt.' }
+  'od-fav-1': { title: 'In the Mood for Love', year: '2000', stars: '★★★★★', date: 'Watched on 01 Jan 2024', comment: 'Koridorlarda geçen sessiz bakışmalar, unutulmayan melodiler ve bastırılmış tutkular...', image: 'moodforlove.jpg' },
+  'od-fav-2': { title: 'Blue Velvet', year: '1986', stars: '★★★★☆', date: 'Watched on 04 Jan 2024', comment: 'Görünen huzurlu kasabanın altındaki o karanlık ve tekinsiz tüneller...', image: 'bluevelvet.jpg' },
+  'od-fav-3': { title: 'Chungking Express', year: '1994', stars: '★★★★★', date: 'Watched on 09 Jan 2024', comment: 'Hong Kong gecelerinin neon ışıkları altında kaybolan, tenha kalplerin hikayesi.', image: 'chungking.jpg' },
+  'od-fav-4': { title: 'Persona', year: '1966', stars: '★★★★★', date: 'Watched on 12 Jan 2024', comment: 'Sinema tarihinin kimlik, yüzler ve sessizlik üzerine yapılmış en sarsıcı denemelerinden biri.', image: 'persona.jpg' },
+  'od-recent-1': { title: 'Climax', year: '2018', stars: '★★★☆☆', date: 'Watched on 15 Jan 2024', comment: 'Kusursuz bir kaos, adım adım deliliğe giden o ince kırmızı çizgi.', image: 'climax.jpg' },
+  'od-recent-2': { title: 'Melancholia', year: '2011', stars: '★★★★☆', date: 'Watched on 19 Jan 2024', comment: 'Gezegen yaklaşırken ruhun içine çöken o kaçınılmaz ağır hüzün.', image: 'melancholia.jpg' },
+  'od-recent-3': { title: 'Black Swan', year: '2010', stars: '★★★★☆', date: 'Watched on 22 Jan 2024', comment: 'Mükemmeliyetçiliğin ve hırsın insan zihnini nasıl parça parça ettiğinin dansı.', image: 'blackswan.jpg' },
+  'od-recent-4': { title: 'The Double Life of Véronique', year: '1991', stars: '★★★★★', date: 'Watched on 25 Jan 2024', comment: 'Keeslowski’den müzikle ve sarı tonlarla örülmüş, ruh eşini arayan hayaletimsi bir başyapıt.', image: 'veronique.jpg' }
 };
-
 // Letterboxd uygulamasını açma
 window.openLetterboxd = function() {
   document.querySelectorAll(".app-window").forEach(app => {
